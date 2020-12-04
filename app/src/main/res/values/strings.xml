@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PriceTrend</string>
+
+    <!-- Home Fragment    -->
+    <string name="home">Home</string>
+    <string name="you_have_saved">You have saved</string>
+    <string name="rp_xxx">Rp xxx.xxx</string>
+    <string name="your_tracking">Your Tracking</string>
+    <string name="see_all">See All</string>
+    <string name="in">in</string>
+    <string name="transactions">transactions</string>
+
+    <!-- Tracking Fragment   -->
+    <string name="tracking">Tracking</string>
+    <string name="tracked_since">Tracked Since: </string>
+    <string name="image_desc">Image Description</string>
+
+</resources>
