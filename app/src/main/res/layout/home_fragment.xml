@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="xx"
+                android:text="@string/xx"
                 app:layout_constraintEnd_toStartOf="@+id/textView5"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView3"
@@ -98,7 +98,7 @@
                     tools:orientation="horizontal" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/button_your_tracking_see_all"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/see_all" />
@@ -124,7 +124,7 @@
 
                     android:layout_height="wrap_content"
 
-                    android:text="Hot Products" />
+                    android:text="@string/hot_products" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/hot_recycler_view"

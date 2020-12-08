@@ -14,5 +14,18 @@
     <string name="tracking">Tracking</string>
     <string name="tracked_since">Tracked Since: </string>
     <string name="image_desc">Image Description</string>
+    <string name="title_home">Home</string>
+    <string name="title_tracking">Tracking</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user001">User001</string>
+    <string name="lifetime_savings">Lifetime Savings</string>
+    <string name="default_saving_value">Rp 325.000</string>
+    <string name="default_trx_count">23</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="your_search_result_will_be_shown_here">Your search result will be shown here</string>
+    <string name="hot_products">Hot Products</string>
+    <string name="xx">xx</string>
+    <string name="profile_picture_of_the_user">Profile picture of the user</string>
 
 </resources>

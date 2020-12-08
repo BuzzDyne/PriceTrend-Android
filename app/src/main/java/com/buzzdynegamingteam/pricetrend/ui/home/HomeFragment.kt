@@ -13,8 +13,10 @@ import com.buzzdynegamingteam.pricetrend.databinding.HomeFragmentBinding
 
 class HomeFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val bind = DataBindingUtil.inflate<HomeFragmentBinding>(inflater,R.layout.home_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        val bind = DataBindingUtil.inflate<HomeFragmentBinding>(inflater,R.layout.home_fragment,
+            container, false)
 
         setupViews(bind)
 
@@ -61,7 +63,6 @@ class HomeFragment : Fragment() {
             bind.hotRecyclerView.setHasFixedSize(true)
 
         }
-
 
         setupTrackingRecycler(dummyTrackList)
         setupHotRecycler(dummyHotList)
