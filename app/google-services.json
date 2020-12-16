@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1047380531753",
+    "firebase_url": "https://pricetrend-8d62c.firebaseio.com",
+    "project_id": "pricetrend-8d62c",
+    "storage_bucket": "pricetrend-8d62c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047380531753:android:84dc1dc64a2e02a08a5a38",
+        "android_client_info": {
+          "package_name": "com.buzzdynegamingteam.pricetrend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047380531753-shj8tm5vblqpuheiseu2jdohop4c2j9n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.buzzdynegamingteam.pricetrend",
+            "certificate_hash": "7d4ef23c47f2b7fb8251b587bb0a50dae46708e0"
+          }
+        },
+        {
+          "client_id": "1047380531753-9g445avant1ua0qa0vfgrrn5roks8hsk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrPQcc_UIOOZh5HKCTAECmDtYkbC4Pr6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047380531753-9g445avant1ua0qa0vfgrrn5roks8hsk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

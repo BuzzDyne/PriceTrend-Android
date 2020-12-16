@@ -1,4 +1,4 @@
-package com.buzzdynegamingteam.pricetrend.ui.tracking
+package com.buzzdynegamingteam.pricetrend.views
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.buzzdynegamingteam.pricetrend.R
 import com.buzzdynegamingteam.pricetrend.databinding.TrackingFragmentBinding
-import com.buzzdynegamingteam.pricetrend.ui.home.HomeTrackingItem
 
 
 class TrackingFragment : Fragment() {
@@ -20,7 +19,10 @@ class TrackingFragment : Fragment() {
 
         val dummyTrackingList = generateDummyTrackingList(30)
 
-        bind.recyclerTracking.adapter = TrackingAdapter(dummyTrackingList)
+        bind.recyclerTracking.adapter =
+            TrackingAdapter(
+                dummyTrackingList
+            )
         bind.recyclerTracking.layoutManager = LinearLayoutManager(this.context)
         bind.recyclerTracking.setHasFixedSize(true)
 
@@ -39,7 +41,13 @@ class TrackingFragment : Fragment() {
                 else -> R.drawable.z650x500
             }
 
-            val item = TrackingItem(drawable, "This is $i very long name This is a very long name long name This long name This long name This ", "Rp ${i}0.000", "-Rp${i}.000", "$i Jun 2020")
+            val item = TrackingItem(
+                drawable,
+                "This is $i very long name This is a very long name long name This long name This long name This ",
+                "Rp ${i}0.000",
+                "-Rp${i}.000",
+                "$i Jun 2020"
+            )
             list += item
         }
 

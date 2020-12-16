@@ -1,4 +1,4 @@
-package com.buzzdynegamingteam.pricetrend.ui.tracking
+package com.buzzdynegamingteam.pricetrend.views
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.buzzdynegamingteam.pricetrend.R
-import org.w3c.dom.Text
 
 class TrackingAdapter(private val itemList: List<TrackingItem>) : RecyclerView.Adapter<TrackingAdapter.TrackingViewHolder>() {
 
@@ -15,7 +14,9 @@ class TrackingAdapter(private val itemList: List<TrackingItem>) : RecyclerView.A
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.tracking_list_item, parent, false)
 
-        return TrackingViewHolder(itemView)
+        return TrackingViewHolder(
+            itemView
+        )
     }
 
     override fun onBindViewHolder(holder: TrackingViewHolder, position: Int) {
