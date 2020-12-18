@@ -27,5 +27,6 @@
     <string name="hot_products">Hot Products</string>
     <string name="xx">xx</string>
     <string name="profile_picture_of_the_user">Profile picture of the user</string>
+    <string name="log_out">Log Out</string>
 
 </resources>

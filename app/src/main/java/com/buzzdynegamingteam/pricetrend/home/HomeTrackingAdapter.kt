@@ -1,4 +1,4 @@
-package com.buzzdynegamingteam.pricetrend.views
+package com.buzzdynegamingteam.pricetrend.home
 
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +15,7 @@ class HomeTrackingAdapter(private val menuList: List<HomeTrackingItem>) : Recycl
             .inflate(R.layout.home_list_item, parent, false)
 
         return HomeTrackingViewHolder(
-            itemView
+                itemView
         )
     }
 

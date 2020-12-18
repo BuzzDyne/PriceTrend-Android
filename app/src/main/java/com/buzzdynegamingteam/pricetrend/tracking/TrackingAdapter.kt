@@ -1,4 +1,4 @@
-package com.buzzdynegamingteam.pricetrend.views
+package com.buzzdynegamingteam.pricetrend.tracking
 
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +15,7 @@ class TrackingAdapter(private val itemList: List<TrackingItem>) : RecyclerView.A
             .inflate(R.layout.tracking_list_item, parent, false)
 
         return TrackingViewHolder(
-            itemView
+                itemView
         )
     }
 
