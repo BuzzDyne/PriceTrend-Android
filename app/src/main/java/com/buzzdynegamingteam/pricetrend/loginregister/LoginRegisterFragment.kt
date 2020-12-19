@@ -27,9 +27,6 @@ class LoginRegisterFragment : Fragment() {
     private val repo = LoginRegisterRepository
     private lateinit var viewModel: LoginRegisterViewModel
 
-    private lateinit var del1: NavController
-    private lateinit var del2: NavController
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val bind = DataBindingUtil.inflate<LoginFragmentBinding>(inflater,R.layout.login_fragment, container, false)
@@ -66,7 +63,6 @@ class LoginRegisterFragment : Fragment() {
         startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
-//                        .setIsSmartLockEnabled(false)
                         .setAvailableProviders(providers)
                         .build(),
                 SIGN_IN_REQUEST_CODE

@@ -26,8 +26,8 @@ class LoginRegisterViewModel : ViewModel(){
     fun initCurrUserData() {
         viewModelScope.launch {
             repo.initCurrUserData()
+            _eventGoToWelcome.value = true
         }
-        _eventGoToWelcome.value = true
     }
 
     fun onAnyNavigateCompleted() {

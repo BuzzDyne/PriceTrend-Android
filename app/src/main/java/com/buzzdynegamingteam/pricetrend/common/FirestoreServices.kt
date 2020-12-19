@@ -27,6 +27,7 @@ object FirestoreServices {
 
     suspend fun createUserDoc(uid: String, name: String) {
         val u = User(displayName = name)
+        Log.i(TAG, "createUserDoc: creating user $u with uid ($uid)")
         db.collection("Users").document(uid).set(u).await()
     }
 }

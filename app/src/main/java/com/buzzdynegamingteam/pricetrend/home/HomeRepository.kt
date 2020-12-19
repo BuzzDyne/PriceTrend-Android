@@ -17,7 +17,7 @@ object HomeRepository {
             Log.i(TAG, "_userValue: before, db.getUsr: ${db.getUserDoc(auth.getCurrUserUID()!!)!!}")
             db.getUserDoc(auth.getCurrUserUID()!!)!!
         } catch (e: Exception) {
-            Log.e(TAG, "_userValue: Error in getting data", e)
+            Log.e(TAG, "getUserData: Error in getting data", e)
             null
         }
     }

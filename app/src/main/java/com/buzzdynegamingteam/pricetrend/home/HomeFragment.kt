@@ -15,14 +15,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.buzzdynegamingteam.pricetrend.R
 import com.buzzdynegamingteam.pricetrend.databinding.HomeFragmentBinding
-//import com.buzzdynegamingteam.pricetrend.views.HomeFragmentArgs
 import com.google.firebase.auth.FirebaseAuth
 
 const val TAG = "HomeFragment"
 
 class HomeFragment : Fragment() {
 
-    private val safeArgs: HomeFragmentArgs by navArgs()
+//    private val safeArgs: HomeFragmentArgs by navArgs()
     private lateinit var viewModel: HomeViewModel
     private lateinit var navController: NavController
 
@@ -32,7 +31,7 @@ class HomeFragment : Fragment() {
             container, false)
 
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        bind.homeViewModel = viewModel
+        bind.viewmodel = viewModel
         bind.lifecycleOwner = viewLifecycleOwner
 
         setupViews(bind)
@@ -102,16 +101,18 @@ class HomeFragment : Fragment() {
         setupTrackingRecycler(dummyTrackList)
         setupHotRecycler(dummyHotList)
 
-        Log.i(TAG, "setupViews: ${safeArgs.isNewUser}")
+//        Log.i(TAG, "setupViews: ${safeArgs.isNewUser}")
 
-        if(safeArgs.isNewUser) {
-            bind.textView2.text = "Welcome New User!!!"
-        }
+//        if(safeArgs.isNewUser) {
+//            bind.textView2.text = "Welcome New User!!!"
+//        }
 
         //OnClickListener
         bind.buttonYourTrackingSeeAll.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_trackingFragment)
         )
     }
+
+
 
 }
