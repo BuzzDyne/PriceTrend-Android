@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.buzzdynegamingteam.pricetrend.common.models.Tracking
 import com.buzzdynegamingteam.pricetrend.common.models.User
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -29,21 +30,23 @@ class HomeViewModel : ViewModel() {
     val getTrxCount : LiveData<String>
         get() = _trxCount
 
+    private val _trackingList = MutableLiveData<List<Tracking>>()
+    val getTrackingList : LiveData<List<Tracking>>
+        get() = _trackingList
+
 
     init {
         viewModelScope.launch {
-            _user.value = repo.getUserData()
-            _totalSaving.value = getUserTotalSaving()
-            _trxCount.value = getTrxCount()
+            _user.value         = repo.getUserData()
+            _totalSaving.value  = getUserTotalSaving()
+            _trxCount.value     = getTrxCount()
+            _trackingList.value = repo.getListOfUserTrackings().toList()
         }
-//        Log.i("HomeViewModel", "_userValue: ${_user.value}")
     }
 
     private fun getUserTotalSaving(): String{
         val tSaving = _user.value?.totalSaving
         val format = NumberFormat.getCurrencyInstance()
-        Log.i(TAG, "getUserTotalSaving: $tSaving")
-        
         return try {
             format.currency = Currency.getInstance("IDR")
             format.format(tSaving)
@@ -57,7 +60,6 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun getTrxCount(): String{
-        Log.i(TAG, "getTrxCount: ${_user.value?.trxCount}")
         return try {
             _user.value?.trxCount.toString()
         } catch (e: Exception) {

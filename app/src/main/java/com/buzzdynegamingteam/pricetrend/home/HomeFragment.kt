@@ -1,21 +1,19 @@
 package com.buzzdynegamingteam.pricetrend.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.buzzdynegamingteam.pricetrend.R
 import com.buzzdynegamingteam.pricetrend.databinding.HomeFragmentBinding
-import com.google.firebase.auth.FirebaseAuth
 
 const val TAG = "HomeFragment"
 
@@ -24,6 +22,7 @@ class HomeFragment : Fragment() {
 //    private val safeArgs: HomeFragmentArgs by navArgs()
     private lateinit var viewModel: HomeViewModel
     private lateinit var navController: NavController
+    private lateinit var homeTrackingAdapter: HomeTrackingAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,18 +35,15 @@ class HomeFragment : Fragment() {
 
         setupViews(bind)
 
+        viewModel.getTrackingList.observe(viewLifecycleOwner, Observer { newTrackingList ->
+            homeTrackingAdapter.setTrackings(newTrackingList)
+        })
+
         // TODO Set ActionBar Title
 //        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.home)
 
         return bind.root
         //return inflater.inflate(R.layout.home_fragment, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
-
-//        Toast.makeText(activity,"Auth is ${safeArgs.isAuthed}",Toast.LENGTH_SHORT).show()
     }
 
     private fun generateDummyList(size: Int): List<HomeTrackingItem> {
@@ -78,11 +74,9 @@ class HomeFragment : Fragment() {
         val dummyTrackList  = generateDummyList(10)
         val dummyHotList    = generateDummyList(20)
 
-        fun setupTrackingRecycler(dataList: List<HomeTrackingItem>) {
-            bind.trackingRecyclerView.adapter =
-                    HomeTrackingAdapter(
-                            dataList
-                    )
+        fun setupTrackingRecycler() {
+            homeTrackingAdapter = HomeTrackingAdapter()
+            bind.trackingRecyclerView.adapter = homeTrackingAdapter
             bind.trackingRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
             //bind.trackingRecyclerView.layoutManager = GridLayoutManager(this.context, 2)
             bind.trackingRecyclerView.setHasFixedSize(true)
@@ -90,7 +84,7 @@ class HomeFragment : Fragment() {
 
         fun setupHotRecycler(dataList: List<HomeTrackingItem>) {
             bind.hotRecyclerView.adapter =
-                    HomeTrackingAdapter(
+                    HomeTrackingAdapterOld(
                             dataList
                     )
             bind.hotRecyclerView.layoutManager = GridLayoutManager(this.context, 2)
@@ -98,7 +92,7 @@ class HomeFragment : Fragment() {
 
         }
 
-        setupTrackingRecycler(dummyTrackList)
+        setupTrackingRecycler()
         setupHotRecycler(dummyHotList)
 
 //        Log.i(TAG, "setupViews: ${safeArgs.isNewUser}")
@@ -113,6 +107,8 @@ class HomeFragment : Fragment() {
         )
     }
 
-
+    fun onHomeTrackingItemClick(item: HomeTrackingItem) {
+        // TODO findNavController().navigate()
+    }
 
 }

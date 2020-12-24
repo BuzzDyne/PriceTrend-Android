@@ -9,7 +9,7 @@ object LoginRegisterRepository {
     private const val TAG = "LoginRegisterRepository"
 
     private val auth = AuthServices
-    private val db = FirestoreServices
+    val db = FirestoreServices
 
     suspend fun initUserData(uid: String) {
         if(!db.isUserDocExist(uid)) {
@@ -19,13 +19,17 @@ object LoginRegisterRepository {
 
     suspend fun initCurrUserData() {
         val uid = auth.getCurrUserUID()!!
-        Log.i(TAG, "initCurrUserData: uid = $uid")
+        Log.e(TAG, "initCurrUserData: uid = $uid")
+        //TODO db.isUserDocExist still isnt being called
+        Log.e(TAG, "initCurrUserData: isDocExist ${db.isUserDocExist(uid)}")
         if(!db.isUserDocExist(uid)) {
-            Log.i(TAG, "initCurrUserData: UserDoc does NOT exist")
+            Log.e(TAG, "initCurrUserData: UserDoc does NOT exist")
             val name = auth.getCurrUserDisplayName() ?: "Guest"
-            Log.i(TAG, "initCurrUserData: currUserName from auth : $name")
+            Log.e(TAG, "initCurrUserData: currUserName from auth : $name")
             db.createUserDoc(uid, name)
         }
+//        val name = auth.getCurrUserDisplayName() ?: "Guest"
+//        db.createUserDoc(uid, name)
     }
 
     fun isUserLoggedIn() = auth.isLoggedIn()

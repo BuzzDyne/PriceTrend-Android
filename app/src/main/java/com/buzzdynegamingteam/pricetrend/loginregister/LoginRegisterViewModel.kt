@@ -25,7 +25,9 @@ class LoginRegisterViewModel : ViewModel(){
 
     fun initCurrUserData() {
         viewModelScope.launch {
+            Log.e(TAG, "initCurrUserData: before init")
             repo.initCurrUserData()
+            Log.e(TAG, "initCurrUserData: after init")
             _eventGoToWelcome.value = true
         }
     }

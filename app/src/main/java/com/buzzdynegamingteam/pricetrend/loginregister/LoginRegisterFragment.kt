@@ -12,9 +12,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.buzzdynegamingteam.pricetrend.R
+import com.buzzdynegamingteam.pricetrend.common.FirestoreServices
 import com.buzzdynegamingteam.pricetrend.databinding.LoginFragmentBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
@@ -91,7 +91,9 @@ class LoginRegisterFragment : Fragment() {
     }
 
     private fun navigateToHomeScreen() {
+        Log.e(TAG, "navigateToHomeScreen: insdie")
         viewModel.initCurrUserData()
+        Log.e(TAG, "navigateToHomeScreen: insdie")
 
         val action = LoginRegisterFragmentDirections.actionLoginFragmentToHomeFragment()
         findNavController().navigate(action)

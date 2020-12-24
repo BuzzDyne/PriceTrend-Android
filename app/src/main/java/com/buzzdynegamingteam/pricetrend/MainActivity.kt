@@ -3,16 +3,13 @@ package com.buzzdynegamingteam.pricetrend
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toolbar
 import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.buzzdynegamingteam.pricetrend.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -59,6 +56,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        val topLevelFrag = listOf(
+                R.id.profileFragment,
+                R.id.trackingListFragment,
+                R.id.searchFragment
+        )
 
+        //TODO learn how to properly manage "Fragment before BottomNav"'s back-stack behaviour
+        if(bind.bottomNav.isVisible) {
+            val selectedId = bind.bottomNav.selectedItemId
+            if(selectedId in topLevelFrag) {
+                val navController = findNavController(R.id.myNavHostFragment)
+//            navController.popBackStack(bind.bottomNav.selectedItemId, true)
+                navController.popBackStack(R.id.homeFragment, true)
+                navController.navigate(R.id.homeFragment)
+                return
+            } else if (selectedId == R.id.homeFragment) {
+                //TODO show exit confirmation dialogbox
+                finish()
+            }
+        }
+
+        super.onBackPressed()
+    }
 
 }

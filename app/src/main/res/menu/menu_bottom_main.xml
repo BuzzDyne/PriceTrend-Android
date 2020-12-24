@@ -8,7 +8,7 @@
         />
 
     <item
-        android:id="@+id/trackingFragment"
+        android:id="@+id/trackingListFragment"
         android:icon="@drawable/ic_tracking"
         android:title="@string/title_tracking"
         />
