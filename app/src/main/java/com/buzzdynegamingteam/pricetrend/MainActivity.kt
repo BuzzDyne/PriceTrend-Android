@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var toolbar: ActionBar
     private lateinit var bind: ActivityMainBinding
-    private lateinit var mSharedViewModel: SharedViewModel
     private lateinit var mController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +27,6 @@ class MainActivity : AppCompatActivity() {
         bind = DataBindingUtil.setContentView(this, R.layout.activity_main)
         toolbar = supportActionBar!!
 
-        //https://stackoverflow.com/questions/53846870/how-to-use-viewmodelproviders-in-kotlin
-        mSharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
         mController = Navigation.findNavController(this, R.id.myNavHostFragment)
 
         setupBottomNavMenu(mController)
@@ -47,13 +44,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    }
-
-    fun checkUserLogin(auth: FirebaseAuth) {
-        var currUser = auth.currentUser
-        if (currUser != null) {
-
-        }
     }
 
     override fun onBackPressed() {
