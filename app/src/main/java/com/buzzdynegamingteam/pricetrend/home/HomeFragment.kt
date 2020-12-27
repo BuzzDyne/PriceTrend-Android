@@ -1,6 +1,7 @@
 package com.buzzdynegamingteam.pricetrend.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.buzzdynegamingteam.pricetrend.R
 import com.buzzdynegamingteam.pricetrend.databinding.HomeFragmentBinding
 
-const val TAG = "HomeFragment"
-
 class HomeFragment : Fragment() {
+    val TAG = "HomeFragment"
 
 //    private val safeArgs: HomeFragmentArgs by navArgs()
     private lateinit var viewModel: HomeViewModel
@@ -103,12 +103,17 @@ class HomeFragment : Fragment() {
 
         //OnClickListener
         bind.buttonYourTrackingSeeAll.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_trackingFragment)
+            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_trackingListFragment)
         )
     }
 
     fun onHomeTrackingItemClick(item: HomeTrackingItem) {
         // TODO findNavController().navigate()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.e(TAG, "onDestroyView")
     }
 
 }

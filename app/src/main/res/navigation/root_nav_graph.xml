@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_nav_graph"
+    app:startDestination="@id/loginRegisterFragment">
+
+    <fragment
+        android:id="@+id/loginRegisterFragment"
+        android:name="com.buzzdynegamingteam.pricetrend.loginregister.LoginRegisterFragment"
+        android:label="LoginRegisterFragment"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_loginRegisterFragment_to_bottomNavFragment"
+            app:destination="@id/bottomNavFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/bottomNavFragment"
+        android:name="com.buzzdynegamingteam.pricetrend.BottomNavFragment"
+        android:label="BottomNavFragment" />
+</navigation>

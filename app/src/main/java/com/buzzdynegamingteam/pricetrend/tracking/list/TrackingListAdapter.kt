@@ -64,7 +64,7 @@ class TrackingListAdapter() : RecyclerView.Adapter<TrackingListAdapter.TrackingV
 
         init {
             itemView.setOnClickListener {
-                Navigation.findNavController(itemView).navigate(TrackingListFragmentDirections.actionTrackingFragmentToTrackingDetailFragment())
+                Navigation.findNavController(itemView).navigate(TrackingListFragmentDirections.actionTrackingListFragmentToTrackingDetailFragment())
             }
         }
     }

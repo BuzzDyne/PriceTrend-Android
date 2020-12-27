@@ -16,14 +16,14 @@
         tools:context=".MainActivity">
 
         <fragment
-            android:id="@+id/myNavHostFragment"
+            android:id="@+id/root_nav_host"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
 
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph"
+            app:defaultNavHost="false"
+            app:navGraph="@navigation/root_nav_graph"
             />
 
 <!--        <androidx.fragment.app.FragmentContainerView-->
@@ -31,14 +31,5 @@
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="0dp"-->
 <!--            android:layout_weight="1"/>-->
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            app:menu="@menu/menu_bottom_main"
-            />
     </LinearLayout>
-
 </layout>

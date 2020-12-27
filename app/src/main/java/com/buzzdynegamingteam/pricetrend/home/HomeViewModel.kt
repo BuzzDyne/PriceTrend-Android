@@ -14,6 +14,8 @@ import java.text.NumberFormat
 import java.util.*
 
 class HomeViewModel : ViewModel() {
+    private val TAG = "HomeViewModel"
+
     private val repo = HomeRepository
 
     private val _user = MutableLiveData<User>()

@@ -5,24 +5,28 @@
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
         android:title="@string/title_home"
+        android:menuCategory="secondary"
         />
 
     <item
         android:id="@+id/trackingListFragment"
         android:icon="@drawable/ic_tracking"
         android:title="@string/title_tracking"
+        android:menuCategory="secondary"
         />
 
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_search"
         android:title="@string/search"
+        android:menuCategory="secondary"
         />
 
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile"
         android:title="@string/profile"
+        android:menuCategory="secondary"
         />
 
 </menu>

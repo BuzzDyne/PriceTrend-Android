@@ -12,6 +12,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.buzzdynegamingteam.pricetrend.R
 import com.buzzdynegamingteam.pricetrend.common.FirestoreServices
@@ -26,6 +28,7 @@ class LoginRegisterFragment : Fragment() {
 
     private val repo = LoginRegisterRepository
     private lateinit var viewModel: LoginRegisterViewModel
+    private lateinit var mNavController: NavController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -33,6 +36,7 @@ class LoginRegisterFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(LoginRegisterViewModel::class.java)
 
+        mNavController = activity?.findNavController(R.id.root_nav_host)!!
 
         bind.btnLogin.setOnClickListener{
             launchPreBuiltSignInFlow()
@@ -77,7 +81,7 @@ class LoginRegisterFragment : Fragment() {
             if (resultCode == Activity.RESULT_OK) {
                 // User successfully signed in.
                 Toast.makeText(activity, "Welcome Back, ${repo.getCurrDisplayName()}!",Toast.LENGTH_SHORT).show()
-                // TODO tell homeFragment if user is new somehow (Maybe check its user doc
+                // TODO tell homeFragment if user is new somehow (Maybe check its user doc)
                 // TODO Maybe pass user doc to homeFragment to save read count
                 navigateToHomeScreen()
             } else {
@@ -91,12 +95,15 @@ class LoginRegisterFragment : Fragment() {
     }
 
     private fun navigateToHomeScreen() {
-        Log.e(TAG, "navigateToHomeScreen: insdie")
         viewModel.initCurrUserData()
-        Log.e(TAG, "navigateToHomeScreen: insdie")
 
-        val action = LoginRegisterFragmentDirections.actionLoginFragmentToHomeFragment()
-        findNavController().navigate(action)
+        val action = LoginRegisterFragmentDirections.actionLoginRegisterFragmentToBottomNavFragment()
+        mNavController.navigate(action)
         viewModel.onAnyNavigateCompleted()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.e(TAG, "onDestroyView: ")
     }
 }
