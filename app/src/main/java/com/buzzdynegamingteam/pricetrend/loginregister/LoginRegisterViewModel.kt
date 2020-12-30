@@ -17,17 +17,33 @@ class LoginRegisterViewModel : ViewModel(){
     val getCurrUser: LiveData<FirebaseUser?>
         get() = _currUser
 
+    private val _loginFinished = MutableLiveData<Boolean>()
+    val _getLoginFinished: LiveData<Boolean>
+        get() = _loginFinished
+
     init {
+        _loginFinished.value = false
         updateCurrUser()
     }
 
-    fun initCurrUserData(uid: String) {
-        runBlocking {
-            repo.initCurrUserData(uid)
+    private fun initCurrUserData() {
+        val uname = _currUser.value!!.displayName?: "Guest"
+        val uid = _currUser.value!!.uid
+
+        viewModelScope.launch {
+            repo.initCurrUserData(uid, uname)
+            _loginFinished.value = true
         }
     }
 
     fun updateCurrUser() {
         _currUser.value = repo.getCurrUser()
+        if(_currUser.value != null) {
+            initCurrUserData()
+        }
+    }
+
+    fun getDisplayName(): String {
+        return repo.getCurrDisplayName()!!
     }
 }

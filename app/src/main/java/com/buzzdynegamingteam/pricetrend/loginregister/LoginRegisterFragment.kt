@@ -24,8 +24,6 @@ const val SIGN_IN_REQUEST_CODE = 200
 const val TAG = "LoginRegisterFragment"
 
 class LoginRegisterFragment : Fragment() {
-
-    private val repo = LoginRegisterRepository
     private lateinit var viewModel: LoginRegisterViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -43,15 +41,14 @@ class LoginRegisterFragment : Fragment() {
             // TODO Implement Custom-built login screen
         }
 
-        viewModel.getCurrUser.observe(viewLifecycleOwner, Observer { currUser ->
-            if(currUser != null){
+        viewModel._getLoginFinished.observe(viewLifecycleOwner, Observer { finished ->
+            if(finished){
                 navigateToHomeScreen()
             }
         })
 
         return bind.root
     }
-
 
     private fun launchPreBuiltSignInFlow() {
         val providers = arrayListOf(
@@ -76,10 +73,8 @@ class LoginRegisterFragment : Fragment() {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == Activity.RESULT_OK) {
                 // User successfully signed in.
-                Toast.makeText(activity, "Welcome Back, ${repo.getCurrDisplayName()}!",Toast.LENGTH_SHORT).show()
                 // TODO tell homeFragment if user is new somehow (Maybe check its user doc
                 // TODO Maybe pass user doc to homeFragment to save read count
-//                viewModel.initCurrUserData(repo.getCurrUser()!!.uid)
                 viewModel.updateCurrUser()
             } else {
                 // Sign in failed. If response is null, the user canceled the
@@ -92,6 +87,7 @@ class LoginRegisterFragment : Fragment() {
     }
 
     private fun navigateToHomeScreen() {
+        Toast.makeText(activity, "Welcome Back, ${viewModel.getDisplayName()}!",Toast.LENGTH_SHORT).show()
         val action = LoginRegisterFragmentDirections.actionLoginFragmentToHomeFragment()
         findNavController().navigate(action)
     }

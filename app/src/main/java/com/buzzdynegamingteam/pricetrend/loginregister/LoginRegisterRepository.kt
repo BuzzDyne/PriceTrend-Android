@@ -17,23 +17,20 @@ object LoginRegisterRepository {
         }
     }
 
-    suspend fun initCurrUserData(uid: String) {
-        Log.e(TAG, "initCurrUserData: uid = $uid")
+    suspend fun initCurrUserData(uid: String, uName: String = "Guest") {
+        Log.e(TAG, "initCurrUserData: uid = $uid, displayName = $uName")
         //TODO db.isUserDocExist still isnt being called
-        Log.e(TAG, "initCurrUserData: isDocExist ${db.isUserDocExist(uid)}")
-        if(!db.isUserDocExist(uid)) {
+        val isUserDocExist = db.isUserDocExist(uid)
+        Log.e(TAG, "initCurrUserData: isDocExist $isUserDocExist")
+        if(!isUserDocExist) {
             Log.e(TAG, "initCurrUserData: UserDoc does NOT exist")
-            val name = auth.getCurrUserDisplayName() ?: "Guest"
-            Log.e(TAG, "initCurrUserData: currUserName from auth : $name")
-            db.createUserDoc(uid, name)
+            db.createUserDoc(uid, uName)
         }
-//        val name = auth.getCurrUserDisplayName() ?: "Guest"
-//        db.createUserDoc(uid, name)
     }
 
     fun getCurrUser() = auth.getCurrUser()
 
     fun getCurrDisplayName(): String? {
-        return auth.getCurrUserDisplayName()
+        return auth.getCurrUserDisplayName()?: "Guest"
     }
 }
