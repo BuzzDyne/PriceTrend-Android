@@ -18,6 +18,7 @@ import com.buzzdynegamingteam.pricetrend.common.FirestoreServices
 import com.buzzdynegamingteam.pricetrend.databinding.LoginFragmentBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.google.firebase.auth.FirebaseUser
 
 const val SIGN_IN_REQUEST_CODE = 200
 const val TAG = "LoginRegisterFragment"
@@ -42,12 +43,11 @@ class LoginRegisterFragment : Fragment() {
             // TODO Implement Custom-built login screen
         }
 
-        viewModel.eventGoToHome.observe(viewLifecycleOwner, Observer { isLoggedIn ->
-            if(isLoggedIn){
+        viewModel.getCurrUser.observe(viewLifecycleOwner, Observer { currUser ->
+            if(currUser != null){
                 navigateToHomeScreen()
             }
         })
-
 
         return bind.root
     }
@@ -79,7 +79,8 @@ class LoginRegisterFragment : Fragment() {
                 Toast.makeText(activity, "Welcome Back, ${repo.getCurrDisplayName()}!",Toast.LENGTH_SHORT).show()
                 // TODO tell homeFragment if user is new somehow (Maybe check its user doc
                 // TODO Maybe pass user doc to homeFragment to save read count
-                navigateToHomeScreen()
+//                viewModel.initCurrUserData(repo.getCurrUser()!!.uid)
+                viewModel.updateCurrUser()
             } else {
                 // Sign in failed. If response is null, the user canceled the
                 // sign-in flow using the back button. Otherwise, check
@@ -91,12 +92,7 @@ class LoginRegisterFragment : Fragment() {
     }
 
     private fun navigateToHomeScreen() {
-        Log.e(TAG, "navigateToHomeScreen: insdie")
-        viewModel.initCurrUserData()
-        Log.e(TAG, "navigateToHomeScreen: insdie")
-
         val action = LoginRegisterFragmentDirections.actionLoginFragmentToHomeFragment()
         findNavController().navigate(action)
-        viewModel.onAnyNavigateCompleted()
     }
 }

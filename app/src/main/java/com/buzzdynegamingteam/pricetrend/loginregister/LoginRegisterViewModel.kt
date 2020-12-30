@@ -5,35 +5,29 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class LoginRegisterViewModel : ViewModel(){
 
     private val repo = LoginRegisterRepository
 
-    private val _eventGoToHome = MutableLiveData<Boolean>()
-    val eventGoToHome: LiveData<Boolean>
-        get() = _eventGoToHome
-
-    private val _eventGoToWelcome = MutableLiveData<Boolean>()
-    val eventGoToWelcome: LiveData<Boolean>
-        get() = _eventGoToWelcome
+    private val _currUser = MutableLiveData<FirebaseUser?>()
+    val getCurrUser: LiveData<FirebaseUser?>
+        get() = _currUser
 
     init {
-        _eventGoToHome.value = repo.isUserLoggedIn()
+        updateCurrUser()
     }
 
-    fun initCurrUserData() {
-        viewModelScope.launch {
-            Log.e(TAG, "initCurrUserData: before init")
-            repo.initCurrUserData()
-            Log.e(TAG, "initCurrUserData: after init")
-            _eventGoToWelcome.value = true
+    fun initCurrUserData(uid: String) {
+        runBlocking {
+            repo.initCurrUserData(uid)
         }
     }
 
-    fun onAnyNavigateCompleted() {
-        _eventGoToHome.value = false
-        _eventGoToWelcome.value = false
+    fun updateCurrUser() {
+        _currUser.value = repo.getCurrUser()
     }
 }

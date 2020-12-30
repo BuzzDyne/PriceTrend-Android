@@ -12,7 +12,6 @@ import com.buzzdynegamingteam.pricetrend.databinding.ProfileFragmentBinding
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 
-
 class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -25,11 +24,10 @@ class ProfileFragment : Fragment() {
             FirebaseAuth.getInstance().signOut()
             AuthUI.getInstance().signOut(requireContext())
 
-            val action = ProfileFragmentDirections.actionProfileFragmentToLoginFragment()
+            val action = ProfileFragmentDirections.actionProfileFragmentToHomeFragment()
             findNavController().navigate(action)
         }
 
-        // Inflate the layout for this fragment
         return bind.root
     }
 }

@@ -21,7 +21,6 @@ data class Tracking (
     val startDate: Date? = Date(),
     var listing: Listing? = null
 ) {
-
     companion object {
         fun DocumentSnapshot.toTracking() : Tracking? {
             return try {

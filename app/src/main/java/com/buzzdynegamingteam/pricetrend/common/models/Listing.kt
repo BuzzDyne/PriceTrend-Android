@@ -21,10 +21,10 @@ data class Listing (
     val storeArea           : String? = null,
 
     val latestData          : LatestData? = LatestData()
-    ) {
+) {
     val data                : Data = Data()
 
-    companion object{
+    companion object {
         fun DocumentSnapshot.toListing() : Listing? {
             return try {
                 val docID = id

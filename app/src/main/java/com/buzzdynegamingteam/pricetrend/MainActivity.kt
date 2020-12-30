@@ -2,6 +2,7 @@ package com.buzzdynegamingteam.pricetrend
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.core.view.isVisible
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         mController = Navigation.findNavController(this, R.id.myNavHostFragment)
 
         setupBottomNavMenu(mController)
+
+        listenBackStackChange()
     }
 
     private fun setupBottomNavMenu(navController: NavController) {
@@ -46,29 +49,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
-        val topLevelFrag = listOf(
-                R.id.profileFragment,
-                R.id.trackingListFragment,
-                R.id.searchFragment
-        )
+    private fun listenBackStackChange() {
+        val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.myNavHostFragment)
 
-        //TODO learn how to properly manage "Fragment before BottomNav"'s back-stack behaviour
-        if(bind.bottomNav.isVisible) {
-            val selectedId = bind.bottomNav.selectedItemId
-            if(selectedId in topLevelFrag) {
-                val navController = findNavController(R.id.myNavHostFragment)
-//            navController.popBackStack(bind.bottomNav.selectedItemId, true)
-                navController.popBackStack(R.id.homeFragment, true)
-                navController.navigate(R.id.homeFragment)
-                return
-            } else if (selectedId == R.id.homeFragment) {
-                //TODO show exit confirmation dialogbox
-                finish()
-            }
+        // ChildFragmentManager of NavHostFragment
+        val navHostChildFragmentManager = navHostFragment?.childFragmentManager
+
+        navHostChildFragmentManager?.addOnBackStackChangedListener {
+
+            val backStackEntryCount = navHostChildFragmentManager.backStackEntryCount
+            val fragments = navHostChildFragmentManager.fragments
+
+            Log.e("TAG", "😛 NavHost count: $backStackEntryCount, fragments: $fragments")
         }
-
-        super.onBackPressed()
     }
 
 }
