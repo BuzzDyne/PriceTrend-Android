@@ -1,6 +1,7 @@
 package com.buzzdynegamingteam.pricetrend.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.buzzdynegamingteam.pricetrend.R
@@ -19,7 +22,6 @@ const val TAG = "HomeFragment"
 
 class HomeFragment : Fragment() {
 
-//    private val safeArgs: HomeFragmentArgs by navArgs()
     private lateinit var viewModel: HomeViewModel
     private lateinit var navController: NavController
     private lateinit var homeTrackingAdapter: HomeTrackingAdapter
@@ -39,11 +41,13 @@ class HomeFragment : Fragment() {
             homeTrackingAdapter.setTrackings(newTrackingList)
         })
 
-        // TODO Set ActionBar Title
-//        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.home)
+        viewModel.getCurrUser.observe(viewLifecycleOwner, Observer { currUser ->
+            if(currUser == null) {
+                navigateToLoginScreen()
+            }
+        })
 
         return bind.root
-        //return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
     private fun generateDummyList(size: Int): List<HomeTrackingItem> {
@@ -78,7 +82,6 @@ class HomeFragment : Fragment() {
             homeTrackingAdapter = HomeTrackingAdapter()
             bind.trackingRecyclerView.adapter = homeTrackingAdapter
             bind.trackingRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-            //bind.trackingRecyclerView.layoutManager = GridLayoutManager(this.context, 2)
             bind.trackingRecyclerView.setHasFixedSize(true)
         }
 
@@ -95,12 +98,6 @@ class HomeFragment : Fragment() {
         setupTrackingRecycler()
         setupHotRecycler(dummyHotList)
 
-//        Log.i(TAG, "setupViews: ${safeArgs.isNewUser}")
-
-//        if(safeArgs.isNewUser) {
-//            bind.textView2.text = "Welcome New User!!!"
-//        }
-
         //OnClickListener
         bind.buttonYourTrackingSeeAll.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_trackingFragment)
@@ -111,4 +108,9 @@ class HomeFragment : Fragment() {
         // TODO findNavController().navigate()
     }
 
+    private fun navigateToLoginScreen() {
+        Log.e(TAG, "navigateToLoginScreen: ")
+        val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+        findNavController().navigate(action)
+    }
 }

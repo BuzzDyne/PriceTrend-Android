@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.buzzdynegamingteam.pricetrend.common.models.Tracking
 import com.buzzdynegamingteam.pricetrend.common.models.User
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.lang.IllegalArgumentException
@@ -14,6 +15,7 @@ import java.text.NumberFormat
 import java.util.*
 
 class HomeViewModel : ViewModel() {
+    private val TAG = "HomeViewModel"
     private val repo = HomeRepository
 
     private val _user = MutableLiveData<User>()
@@ -21,7 +23,6 @@ class HomeViewModel : ViewModel() {
         get() = _user
 
     //https://stackoverflow.com/questions/63512783/data-binding-how-to-solve-could-not-find-accessor-issue
-
     private val _totalSaving = MutableLiveData<String>()
     val getTotalSaving : LiveData<String>
         get() = _totalSaving
@@ -34,13 +35,21 @@ class HomeViewModel : ViewModel() {
     val getTrackingList : LiveData<List<Tracking>>
         get() = _trackingList
 
+    private val _currUser = MutableLiveData<FirebaseUser?>()
+    val getCurrUser: LiveData<FirebaseUser?>
+        get() = _currUser
 
     init {
-        viewModelScope.launch {
-            _user.value         = repo.getUserData()
-            _totalSaving.value  = getUserTotalSaving()
-            _trxCount.value     = getTrxCount()
-            _trackingList.value = repo.getListOfUserTrackings().toList()
+        Log.e("HomeViewModel", "repo.getCurrUser: ${repo.getCurrUser()}")
+        _currUser.value = repo.getCurrUser()
+
+        if(_currUser.value != null) {
+            viewModelScope.launch {
+                    _user.value         = repo.getUserData()
+                    _totalSaving.value  = getUserTotalSaving()
+                    _trxCount.value     = getTrxCount()
+                    _trackingList.value = repo.getListOfUserTrackings().toList()
+            }
         }
     }
 

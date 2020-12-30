@@ -34,4 +34,5 @@ object HomeRepository {
         return listOfTracking
     }
 
+    fun getCurrUser() = auth.getCurrUser()
 }

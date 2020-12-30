@@ -18,13 +18,12 @@ import com.buzzdynegamingteam.pricetrend.common.FirestoreServices
 import com.buzzdynegamingteam.pricetrend.databinding.LoginFragmentBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.google.firebase.auth.FirebaseUser
 
 const val SIGN_IN_REQUEST_CODE = 200
 const val TAG = "LoginRegisterFragment"
 
 class LoginRegisterFragment : Fragment() {
-
-    private val repo = LoginRegisterRepository
     private lateinit var viewModel: LoginRegisterViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -42,16 +41,14 @@ class LoginRegisterFragment : Fragment() {
             // TODO Implement Custom-built login screen
         }
 
-        viewModel.eventGoToHome.observe(viewLifecycleOwner, Observer { isLoggedIn ->
-            if(isLoggedIn){
+        viewModel._getLoginFinished.observe(viewLifecycleOwner, Observer { finished ->
+            if(finished){
                 navigateToHomeScreen()
             }
         })
 
-
         return bind.root
     }
-
 
     private fun launchPreBuiltSignInFlow() {
         val providers = arrayListOf(
@@ -76,10 +73,9 @@ class LoginRegisterFragment : Fragment() {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == Activity.RESULT_OK) {
                 // User successfully signed in.
-                Toast.makeText(activity, "Welcome Back, ${repo.getCurrDisplayName()}!",Toast.LENGTH_SHORT).show()
                 // TODO tell homeFragment if user is new somehow (Maybe check its user doc
                 // TODO Maybe pass user doc to homeFragment to save read count
-                navigateToHomeScreen()
+                viewModel.updateCurrUser()
             } else {
                 // Sign in failed. If response is null, the user canceled the
                 // sign-in flow using the back button. Otherwise, check
@@ -91,12 +87,8 @@ class LoginRegisterFragment : Fragment() {
     }
 
     private fun navigateToHomeScreen() {
-        Log.e(TAG, "navigateToHomeScreen: insdie")
-        viewModel.initCurrUserData()
-        Log.e(TAG, "navigateToHomeScreen: insdie")
-
+        Toast.makeText(activity, "Welcome Back, ${viewModel.getDisplayName()}!",Toast.LENGTH_SHORT).show()
         val action = LoginRegisterFragmentDirections.actionLoginFragmentToHomeFragment()
         findNavController().navigate(action)
-        viewModel.onAnyNavigateCompleted()
     }
 }
