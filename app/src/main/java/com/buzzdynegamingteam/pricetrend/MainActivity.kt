@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.buzzdynegamingteam.pricetrend.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -30,9 +32,26 @@ class MainActivity : AppCompatActivity() {
 
         mController = Navigation.findNavController(this, R.id.myNavHostFragment)
 
+        val appBarConfiguration = AppBarConfiguration
+            .Builder(
+                R.id.homeFragment,
+                R.id.trackingListFragment,
+                R.id.searchFragment,
+                R.id.profileFragment,
+                R.id.loginFragment
+            )
+            .build()
+
+        NavigationUI.setupActionBarWithNavController(this, mController, appBarConfiguration)
+
         setupBottomNavMenu(mController)
 
         listenBackStackChange()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.myNavHostFragment)
+        return navController.navigateUp()
     }
 
     private fun setupBottomNavMenu(navController: NavController) {

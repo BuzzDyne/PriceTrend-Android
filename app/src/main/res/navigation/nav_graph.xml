@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.buzzdynegamingteam.pricetrend.loginregister.LoginRegisterFragment"
-        android:label="login_fragment"
+        android:label="Login"
         tools:layout="@layout/login_fragment" >
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.buzzdynegamingteam.pricetrend.home.HomeFragment"
-        android:label="HomeFragment"
+        android:label="Home"
         tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_trackingFragment"
@@ -40,7 +40,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.buzzdynegamingteam.pricetrend.profile.ProfileFragment"
-        android:label="ProfileFragment"
+        android:label="Profile"
         tools:layout="@layout/profile_fragment">
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
@@ -60,7 +60,7 @@
     <fragment
         android:id="@+id/trackingListFragment"
         android:name="com.buzzdynegamingteam.pricetrend.tracking.list.TrackingListFragment"
-        android:label="trackingListFragment"
+        android:label="Tracking"
         tools:layout="@layout/tracking_list_fragment">
         <action
             android:id="@+id/action_trackingFragment_to_trackingDetailFragment"
@@ -69,12 +69,12 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.buzzdynegamingteam.pricetrend.search.SearchFragment"
-        android:label="SearchFragment"
+        android:label="Search"
         tools:layout="@layout/search_fragment" />
     <fragment
         android:id="@+id/trackingDetailFragment"
         android:name="com.buzzdynegamingteam.pricetrend.tracking.detail.TrackingDetailFragment"
-        android:label="TrackingDetailFragment"
+        android:label="Tracking Detail"
         tools:layout="@layout/tracking_detail_fragment">
         <argument
             android:name="trackingDocID"
