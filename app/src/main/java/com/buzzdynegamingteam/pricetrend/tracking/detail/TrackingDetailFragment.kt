@@ -10,16 +10,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.buzzdynegamingteam.pricetrend.R
-import com.buzzdynegamingteam.pricetrend.common.StringFormatter
 import com.buzzdynegamingteam.pricetrend.common.StringFormatter.Companion.formatDateToString
 import com.buzzdynegamingteam.pricetrend.common.StringFormatter.Companion.formatPriceToRupiah
 import com.buzzdynegamingteam.pricetrend.databinding.TrackingDetailFragmentBinding
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 
 class TrackingDetailFragment : Fragment() {
     private val TAG = "TrackingDetailFragment"
@@ -52,6 +54,8 @@ class TrackingDetailFragment : Fragment() {
                     Log.e(TAG, "Datarow: $r")
                 }
             }
+
+            updateGraphData(bind)
         }
 
         bind.btnTokopedia.setOnClickListener{
@@ -76,9 +80,45 @@ class TrackingDetailFragment : Fragment() {
 
             val trackedSince = formatDateToString(tracking.startDate)
             bind.textTrackedSince.text = getString(R.string.tracked_since_format, trackedSince)
+
+//            updateGraphData(bind)
         })
 
+        with(bind.lineChart) {
+            setBackgroundColor(Color.LTGRAY)
+            description.isEnabled = false
+            setTouchEnabled(true)
+            setDrawGridBackground(true)
+
+            xAxis.enableGridDashedLine(10f, 10f, 0f)
+
+            axisRight.isEnabled = false
+            axisLeft.enableGridDashedLine(10f, 10f, 0f)
+
+            axisLeft.axisMaximum = 200f
+            axisLeft.axisMinimum = -50f
+        }
+
         return bind.root
+    }
+
+    private fun updateGraphData(bind: TrackingDetailFragmentBinding) {
+        val values = mutableListOf<Entry>()
+        var i = 1F
+        for(data in viewModel.getListingDataRows.value!!) {
+            values.add(Entry(i, 10F))
+            i += 1F
+        }
+
+        val set1 = LineDataSet(values, "Test Set")
+        val dataSets = listOf<ILineDataSet>(set1)
+        val data = LineData(dataSets)
+
+        bind.lineChart.data = data
+
+        set1.notifyDataSetChanged()
+        bind.lineChart.data.notifyDataChanged()
+        bind.lineChart.notifyDataSetChanged()
     }
 
     private fun openLink(link: String?) {

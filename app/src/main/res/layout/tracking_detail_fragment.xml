@@ -15,20 +15,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".tracking.detail.TrackingDetailFragment"
-        >
-        
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        tools:context=".tracking.detail.TrackingDetailFragment">
 
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            style="@style/DefaultContainer"
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
 
-            style="@style/DefaultContainer"
-            >
-            
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
             <ImageView
                 android:id="@+id/img_listing"
                 android:layout_width="100dp"
@@ -37,10 +38,9 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/z650x500"
 
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/text_listing_name"
@@ -49,19 +49,18 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
 
-                android:textSize="14sp"
                 android:ellipsize="end"
                 android:maxLines="2"
-
                 android:text="@{viewmodel.getTrackingData.listing.listingName}"
+
+                android:textSize="14sp"
                 android:textStyle="bold"
 
-                app:layout_constraintTop_toTopOf="@id/img_listing"
-                app:layout_constraintStart_toEndOf="@id/img_listing"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_listing"
+                app:layout_constraintTop_toTopOf="@id/img_listing"
 
-                tools:text="Casing PC Cooler Master MasterBox Q300L Casing PC Cooler Q300L Casing PC Cooler"
-                />
+                tools:text="Casing PC Cooler Master MasterBox Q300L Casing PC Cooler Q300L Casing PC Cooler" />
 
             <LinearLayout
                 android:id="@+id/container_listing_metadata"
@@ -71,8 +70,7 @@
                 android:orientation="vertical"
 
                 app:layout_constraintStart_toStartOf="@id/text_listing_name"
-                app:layout_constraintTop_toBottomOf="@id/text_listing_name"
-                >
+                app:layout_constraintTop_toBottomOf="@id/text_listing_name">
 
                 <TextView
                     android:id="@+id/text_shop_name"
@@ -81,31 +79,30 @@
                     android:text="@{viewmodel.getTrackingData.listing.storeName}"
                     android:textSize="10sp"
 
-                    tools:text="Toko Komputer"
-                    />
+                    tools:text="Toko Komputer" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
                     android:text="@{@string/sold_format(viewmodel.getTrackingData.listing.latestData.sold)}"
-                    tools:text="Sold: 2"
                     android:textSize="10sp"
-                    />
+                    tools:text="Sold: 2" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
                     android:text="@{@string/review_format(viewmodel.getTrackingData.listing.latestData.reviewScore, viewmodel.getTrackingData.listing.latestData.reviewCount)}"
-                    tools:text="Review Score: 80 (21)"
                     android:textSize="10sp"
-                    />
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
+                    tools:text="Review Score: 80 (21)" />
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
 
-<!--                    android:text="@string/area"-->
-<!--                    android:textSize="10sp"-->
-<!--                    />-->
+                <!--                    android:text="@string/area"-->
+                <!--                    android:textSize="10sp"-->
+                <!--                    />-->
 
             </LinearLayout>
 
@@ -116,9 +113,8 @@
                 android:gravity="end"
                 android:orientation="vertical"
 
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                >
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
                     android:id="@+id/text_stock"
@@ -127,23 +123,23 @@
 
                     android:text="@{String.valueOf(viewmodel.getTrackingData.listing.latestData.stock)}"
 
-                    tools:text="Ready Stock"
-                    />
+                    tools:text="Ready Stock" />
+
                 <TextView
                     android:id="@+id/text_listing_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:textSize="18sp"
                     android:text="Rp 4.420.000"
-                    />
+                    android:textSize="18sp" />
+
                 <TextView
                     android:id="@+id/text_listing_price_diff"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:textSize="10sp"
-                    android:text="-Rp 50.000"/>
+                    android:text="-Rp 50.000"
+                    android:textSize="10sp" />
 
 
             </LinearLayout>
@@ -158,29 +154,71 @@
                 android:textSize="10sp"
 
                 app:layout_constraintBottom_toBottomOf="@+id/img_listing"
-                app:layout_constraintStart_toStartOf="@id/text_listing_name"/>
+                app:layout_constraintStart_toStartOf="@id/text_listing_name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:layout_margin="16dp"
+
+            app:layout_constraintBottom_toTopOf="@+id/btn_test"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
         <Button
             android:id="@+id/btn_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="Print Log"
-
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Log"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_tokopedia"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/lineChart" />
 
         <Button
             android:id="@+id/btn_tokopedia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="Tokopedia"
+            android:text="Tokped"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/btn_delete_tracking"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_test" />
+
+        <Button
+            android:id="@+id/btn_delete_tracking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Delete"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_complete_tracking"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_tokopedia" />
+
+        <Button
+            android:id="@+id/btn_complete_tracking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Done"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_delete_tracking" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
