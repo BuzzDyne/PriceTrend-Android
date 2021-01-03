@@ -15,7 +15,7 @@ object TrackingListRepository {
         val listOfTracking = db.getUserTrackings(auth.getCurrUserUID()!!)
         for (x in listOfTracking) {
             x.listingDocID?.let {
-                x.listing = db.getListingData(x.listingDocID)
+                x.listing = db.getListingDoc(x.listingDocID)
             }
         }
         return listOfTracking

@@ -22,7 +22,7 @@ data class Listing (
 
     val latestData          : LatestData? = LatestData()
 ) {
-    val data                : Data = Data()
+    val data                : List<Data> = listOf()
 
     companion object {
         fun DocumentSnapshot.toListing() : Listing? {

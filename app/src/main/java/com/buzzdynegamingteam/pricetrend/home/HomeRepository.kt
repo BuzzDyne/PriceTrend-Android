@@ -5,7 +5,6 @@ import com.buzzdynegamingteam.pricetrend.common.AuthServices
 import com.buzzdynegamingteam.pricetrend.common.FirestoreServices
 import com.buzzdynegamingteam.pricetrend.common.models.Tracking
 import com.buzzdynegamingteam.pricetrend.common.models.User
-import com.buzzdynegamingteam.pricetrend.loginregister.LoginRegisterRepository
 
 object HomeRepository {
     private const val TAG = "HomeRepository"
@@ -28,7 +27,7 @@ object HomeRepository {
         val listOfTracking = db.getUserTrackings(auth.getCurrUserUID()!!)
         for (x in listOfTracking) {
             x.listingDocID?.let {
-                x.listing = db.getListingData(x.listingDocID)
+                x.listing = db.getListingDoc(x.listingDocID)
             }
         }
         return listOfTracking

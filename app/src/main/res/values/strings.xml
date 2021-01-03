@@ -28,5 +28,10 @@
     <string name="xx">xx</string>
     <string name="profile_picture_of_the_user">Profile picture of the user</string>
     <string name="log_out">Log Out</string>
+    <string name="shop">Shop</string>
+    <string name="area">Area</string>
+    <string name="sold_format">Sold: %d</string>
+    <string name="review_format">Review Score: %1$d (%2$d)</string>
+    <string name="tracked_since_format">Tracked Since: %s</string>
 
 </resources>

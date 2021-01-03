@@ -75,7 +75,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupViews(bind: HomeFragmentBinding) {
-        val dummyTrackList  = generateDummyList(10)
         val dummyHotList    = generateDummyList(20)
 
         fun setupTrackingRecycler() {

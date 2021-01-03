@@ -75,5 +75,10 @@
         android:id="@+id/trackingDetailFragment"
         android:name="com.buzzdynegamingteam.pricetrend.tracking.detail.TrackingDetailFragment"
         android:label="TrackingDetailFragment"
-        tools:layout="@layout/tracking_detail_fragment"/>
+        tools:layout="@layout/tracking_detail_fragment">
+        <argument
+            android:name="trackingDocID"
+            app:argType="string"
+            android:defaultValue="x"/>
+    </fragment>
 </navigation>

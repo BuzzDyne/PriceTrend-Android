@@ -12,7 +12,7 @@ import com.buzzdynegamingteam.pricetrend.R
 import com.buzzdynegamingteam.pricetrend.common.StringFormatter
 import com.buzzdynegamingteam.pricetrend.common.models.Tracking
 
-class TrackingListAdapter() : RecyclerView.Adapter<TrackingListAdapter.TrackingViewHolder>() {
+class TrackingListAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<TrackingListAdapter.TrackingViewHolder>() {
 
     private var itemList : List<Tracking> = listOf()
 
@@ -55,7 +55,8 @@ class TrackingListAdapter() : RecyclerView.Adapter<TrackingListAdapter.TrackingV
         notifyDataSetChanged()
     }
 
-    class TrackingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class TrackingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+    View.OnClickListener{
         val imageView:  ImageView= itemView.findViewById(R.id.image_listing)
         val nameView:   TextView = itemView.findViewById(R.id.text_listing_name)
         val price:      TextView = itemView.findViewById(R.id.text_price)
@@ -63,9 +64,22 @@ class TrackingListAdapter() : RecyclerView.Adapter<TrackingListAdapter.TrackingV
         val ts:         TextView = itemView.findViewById(R.id.text_ts)
 
         init {
-            itemView.setOnClickListener {
-                Navigation.findNavController(itemView).navigate(TrackingListFragmentDirections.actionTrackingFragmentToTrackingDetailFragment())
+//            itemView.setOnClickListener {
+//                Navigation.findNavController(itemView).navigate(TrackingListFragmentDirections.actionTrackingFragmentToTrackingDetailFragment())
+//            }
+//            imageView.setOnClickListener(this)
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(p0: View?) {
+            val position = adapterPosition
+            if(position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
             }
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 }

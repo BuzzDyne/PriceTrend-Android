@@ -50,8 +50,6 @@
             android:text="Casing PC Cooler Master MasterBox Q300L Casing PC Cooler Q300L Casing PC Cooler "
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_listing"
-
-
             app:layout_constraintTop_toTopOf="@+id/image_listing" />
 
         <TextView

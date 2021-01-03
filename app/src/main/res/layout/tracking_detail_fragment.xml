@@ -17,19 +17,170 @@
         android:layout_height="match_parent"
         tools:context=".tracking.detail.TrackingDetailFragment"
         >
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            style="@style/DefaultContainer"
+            >
+            
+            <ImageView
+                android:id="@+id/img_listing"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+
+                android:scaleType="centerCrop"
+                android:src="@drawable/z650x500"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/text_listing_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+
+                android:textSize="14sp"
+                android:ellipsize="end"
+                android:maxLines="2"
+
+                android:text="@{viewmodel.getTrackingData.listing.listingName}"
+                android:textStyle="bold"
+
+                app:layout_constraintTop_toTopOf="@id/img_listing"
+                app:layout_constraintStart_toEndOf="@id/img_listing"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                tools:text="Casing PC Cooler Master MasterBox Q300L Casing PC Cooler Q300L Casing PC Cooler"
+                />
+
+            <LinearLayout
+                android:id="@+id/container_listing_metadata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="vertical"
+
+                app:layout_constraintStart_toStartOf="@id/text_listing_name"
+                app:layout_constraintTop_toBottomOf="@id/text_listing_name"
+                >
+
+                <TextView
+                    android:id="@+id/text_shop_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewmodel.getTrackingData.listing.storeName}"
+                    android:textSize="10sp"
+
+                    tools:text="Toko Komputer"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@{@string/sold_format(viewmodel.getTrackingData.listing.latestData.sold)}"
+                    tools:text="Sold: 2"
+                    android:textSize="10sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@{@string/review_format(viewmodel.getTrackingData.listing.latestData.reviewScore, viewmodel.getTrackingData.listing.latestData.reviewCount)}"
+                    tools:text="Review Score: 80 (21)"
+                    android:textSize="10sp"
+                    />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+
+<!--                    android:text="@string/area"-->
+<!--                    android:textSize="10sp"-->
+<!--                    />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="end"
+                android:orientation="vertical"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+                <TextView
+                    android:id="@+id/text_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@{String.valueOf(viewmodel.getTrackingData.listing.latestData.stock)}"
+
+                    tools:text="Ready Stock"
+                    />
+                <TextView
+                    android:id="@+id/text_listing_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="18sp"
+                    android:text="Rp 4.420.000"
+                    />
+                <TextView
+                    android:id="@+id/text_listing_price_diff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="10sp"
+                    android:text="-Rp 50.000"/>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_tracked_since"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="@string/tracked_since"
+                android:textSize="10sp"
+
+                app:layout_constraintBottom_toBottomOf="@+id/img_listing"
+                app:layout_constraintStart_toStartOf="@id/text_listing_name"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btn_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="@{viewmodel.getTrackingData.listingDocID}"
-            tools:text="listingDocID"
+            android:text="Print Log"
 
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+            android:id="@+id/btn_tokopedia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Tokopedia"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

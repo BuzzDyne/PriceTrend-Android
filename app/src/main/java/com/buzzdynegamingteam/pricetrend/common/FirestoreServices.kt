@@ -1,6 +1,7 @@
 package com.buzzdynegamingteam.pricetrend.common
 
 import android.util.Log
+import com.buzzdynegamingteam.pricetrend.common.models.Data
 import com.buzzdynegamingteam.pricetrend.common.models.Listing
 import com.buzzdynegamingteam.pricetrend.common.models.Listing.Companion.toListing
 import com.buzzdynegamingteam.pricetrend.common.models.Tracking
@@ -8,6 +9,7 @@ import com.buzzdynegamingteam.pricetrend.common.models.Tracking.Companion.toTrac
 import com.buzzdynegamingteam.pricetrend.common.models.User
 import com.buzzdynegamingteam.pricetrend.common.models.User.Companion.toUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.tasks.await
 
 object FirestoreServices {
@@ -57,8 +59,23 @@ object FirestoreServices {
         return trackingDoc.toTracking() ?: Tracking()
     }
 
-    suspend fun getListingData(listingDocID: String) : Listing? {
+    suspend fun getListingDoc(listingDocID: String) : Listing? {
         val listingDoc = db.collection("Listings").document(listingDocID).get().await()
         return listingDoc.toListing()
+    }
+
+    suspend fun getListingDataRows(listingDocID: String, rows: Long) : List<Data> {
+        val listOfListingData = mutableListOf<Data>()
+
+        val listingDataDocs = db.collection("Listings/$listingDocID/data")
+                .orderBy("ts", Query.Direction.DESCENDING)
+                .limit(rows)
+                .get().await()
+
+        for (doc in listingDataDocs.documents) {
+            listOfListingData.add( doc.toObject(Data::class.java)!! )
+        }
+
+        return listOfListingData
     }
 }

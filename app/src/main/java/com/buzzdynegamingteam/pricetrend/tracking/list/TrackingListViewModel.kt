@@ -32,5 +32,7 @@ class TrackingListViewModel : ViewModel() {
         }
     }
 
-
+    fun getTrackingIDfromPos(pos: Int): String? {
+        return _trackingList.value?.get(pos)?.documentID
+    }
 }
