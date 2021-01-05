@@ -166,11 +166,62 @@
 
             android:layout_margin="16dp"
 
-            app:layout_constraintBottom_toTopOf="@+id/btn_test"
+            app:layout_constraintBottom_toTopOf="@+id/container_lineChart2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_lineChart2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+
+            app:layout_constraintTop_toBottomOf="@id/lineChart"
+            app:layout_constraintBottom_toTopOf="@id/btn_tokopedia"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/text_choose_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/choose_data"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/spinner_lineChart2"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+            <Spinner
+                android:id="@+id/spinner_lineChart2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+
+                android:layout_marginStart="8dp"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/text_choose_data"
+                />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/lineChart2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                android:layout_marginTop="8dp"
+
+                app:layout_constraintTop_toBottomOf="@id/spinner_lineChart2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:id="@+id/btn_test"
@@ -180,9 +231,7 @@
             android:text="Log"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_tokopedia"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineChart" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btn_tokopedia"
@@ -195,14 +244,16 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btn_test" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_delete_tracking"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
 
-            android:text="Delete"
+            android:src="@drawable/ic_delete"
 
-            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintBottom_toBottomOf="@id/btn_complete_tracking"
+            app:layout_constraintTop_toTopOf="@id/btn_complete_tracking"
             app:layout_constraintEnd_toStartOf="@+id/btn_complete_tracking"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btn_tokopedia" />

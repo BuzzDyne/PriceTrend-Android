@@ -16,6 +16,7 @@ data class Tracking (
     val startPrice: Long? = null,
     val startSoldCount: Long? = null,
     val startSeenCount: Long? = null,
+    val startStockCount: Long? = null,
     val startReviewCount: Long? = null,
     val startReviewScore: Long? = null,
     val startDate: Date? = Date(),
@@ -31,14 +32,15 @@ data class Tracking (
                 val startPrice      = getLong("startPrice")
                 val startSoldCount  = getLong("startSoldCount")
                 val startSeenCount  = getLong("startSeenCount")
+                val startStockCount = getLong("startStockCount")
                 val startReviewCount= getLong("startReviewCount")
                 val startReviewScore= getLong("startReviewScore")
                 val startDate       = getDate("startDate")
 
                 Tracking(
                         docID, listingDocID, listingID, onProcess, startPrice,
-                        startSoldCount, startSeenCount, startReviewCount,
-                        startReviewScore, startDate
+                        startSoldCount, startSeenCount, startStockCount,
+                        startReviewCount, startReviewScore, startDate
                 )
             } catch (e: Exception) {
                 Log.e("Tracking", "Error converting tracking data", e)

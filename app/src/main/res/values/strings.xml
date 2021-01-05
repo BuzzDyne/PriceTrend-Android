@@ -33,5 +33,6 @@
     <string name="sold_format">Sold: %d</string>
     <string name="review_format">Review Score: %1$d (%2$d)</string>
     <string name="tracked_since_format">Tracked Since: %s</string>
+    <string name="choose_data">Choose Data:</string>
 
 </resources>

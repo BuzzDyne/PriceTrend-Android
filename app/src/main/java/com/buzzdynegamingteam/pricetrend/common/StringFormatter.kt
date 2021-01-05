@@ -31,9 +31,13 @@ class StringFormatter {
             }
         }
 
+        fun formatPriceToRupiah(x: Float) : String {
+            return formatPriceToRupiah(x.toLong())
+        }
+
         @SuppressLint("SimpleDateFormat")
-        fun formatDateToString(x:Date?) : String {
-            val formatter = SimpleDateFormat("dd MMM yyyy HH:mm")
+        fun formatDateToString(x:Date?, format: String = "dd MMM yyyy HH:mm") : String {
+            val formatter = SimpleDateFormat(format)
             return try {
                 formatter.format(x)
             } catch (e: Exception) {

@@ -55,14 +55,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavMenu(navController: NavController) {
-
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNav?.setupWithNavController(navController)
 
+        val noNavBarDestinations = listOf(
+                R.id.loginFragment,
+                R.id.trackingDetailFragment
+                )
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.loginFragment  -> bottomNav.visibility = View.GONE
-                else                -> bottomNav.visibility = View.VISIBLE
+//            when (destination.id) {
+//                R.id.loginFragment  -> bottomNav.visibility = View.GONE
+//                else                -> bottomNav.visibility = View.VISIBLE
+//            }
+            if (destination.id in noNavBarDestinations) {
+                bottomNav.visibility = View.GONE
+            } else {
+                bottomNav.visibility = View.VISIBLE
             }
         }
 
