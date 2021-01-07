@@ -16,6 +16,7 @@ data class Listing (
     val listingID           : String? = null,
     val listingURL          : String? = null,
     val listingImgURL       : String? = null,
+    val listingThumbUrl     : String? = null,
 
     val storeName           : String? = null,
     val storeArea           : String? = null,
@@ -34,14 +35,15 @@ data class Listing (
                 val listingID           = getLong("listingID").toString()
                 val listingURL          = getString("listingURL")
                 val listingImgURL       = getString("listingImgURL")
+                val listingThumbURL     = getString("listingThumbURL")
                 val storeName           = getString("storeName")
                 val storeArea           = getString("storeArea")
                 @Suppress("UNCHECKED_CAST")
                 val latestData          = LatestData.fsToLatestData(get("latestData") as Map<String, *>)
 
                 Listing(
-                    docID, statActiveTracking, statBought, listingName, listingID,
-                        listingURL, listingImgURL, storeName, storeArea, latestData
+                    docID, statActiveTracking, statBought, listingName, listingID, listingURL,
+                        listingImgURL, listingThumbURL, storeName, storeArea, latestData
                 )
             } catch (e: Exception) {
                 Log.e("Tracking", "Error converting tracking data", e)

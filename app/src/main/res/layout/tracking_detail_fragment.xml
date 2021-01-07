@@ -179,11 +179,10 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
 
-            app:layout_constraintTop_toBottomOf="@id/lineChart"
-            app:layout_constraintBottom_toTopOf="@id/btn_tokopedia"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_delete_tracking"
             app:layout_constraintEnd_toEndOf="parent"
-            >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineChart">
 
             <TextView
                 android:id="@+id/text_choose_data"
@@ -192,21 +191,20 @@
 
                 android:text="@string/choose_data"
 
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/spinner_lineChart2"
                 app:layout_constraintStart_toStartOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
+
             <Spinner
                 android:id="@+id/spinner_lineChart2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:spinnerMode="dropdown"
-
                 android:layout_marginStart="8dp"
 
-                app:layout_constraintTop_toTopOf="parent"
+                android:spinnerMode="dropdown"
+
                 app:layout_constraintStart_toEndOf="@id/text_choose_data"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/lineChart2"
@@ -215,34 +213,13 @@
 
                 android:layout_marginTop="8dp"
 
-                app:layout_constraintTop_toBottomOf="@id/spinner_lineChart2"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinner_lineChart2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/btn_test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="Log"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_tokopedia"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/btn_tokopedia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="Tokped"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_delete_tracking"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btn_test" />
 
         <ImageButton
             android:id="@+id/btn_delete_tracking"
@@ -253,21 +230,38 @@
 
 
             app:layout_constraintBottom_toBottomOf="@id/btn_complete_tracking"
-            app:layout_constraintTop_toTopOf="@id/btn_complete_tracking"
             app:layout_constraintEnd_toStartOf="@+id/btn_complete_tracking"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btn_tokopedia" />
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="@id/lineChart"
+            app:layout_constraintTop_toTopOf="@+id/btn_complete_tracking" />
+
+
+        <Button
+            android:id="@+id/btn_tokopedia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="4dp"
+
+            android:text="Tokped"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/lineChart"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@+id/btn_complete_tracking" />
 
         <Button
             android:id="@+id/btn_complete_tracking"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
 
             android:text="Done"
 
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_tokopedia"
             app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toEndOf="@+id/btn_delete_tracking" />
 
 

@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.buzzdynegamingteam.pricetrend.R
 import com.buzzdynegamingteam.pricetrend.common.models.Tracking
+import com.squareup.picasso.Picasso
 
 class HomeTrackingAdapterOld(private val menuList: List<HomeTrackingItem>) : RecyclerView.Adapter<HomeTrackingAdapterOld.HomeTrackingViewHolder>() {
 
@@ -54,6 +55,11 @@ class HomeTrackingAdapter() : RecyclerView.Adapter<HomeTrackingAdapter.HomeTrack
 
         holder.nameTextView.text = currItem.listing?.listingName
         holder.priceText.text = currItem.listing?.latestData?.price.toString()
+
+        Picasso.get()
+            .load(currItem.listing?.listingThumbUrl)
+            .placeholder(R.drawable.z650x500)
+            .into(holder.prodImg)
     }
 
     override fun getItemCount(): Int {
@@ -68,6 +74,7 @@ class HomeTrackingAdapter() : RecyclerView.Adapter<HomeTrackingAdapter.HomeTrack
     class HomeTrackingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.prodname_text)
         val priceText: TextView = itemView.findViewById(R.id.pricediff_text)
+        val prodImg: ImageView = itemView.findViewById(R.id.prod_image)
 
         init {
             itemView.setOnClickListener {

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.buzzdynegamingteam.pricetrend.R
 import com.buzzdynegamingteam.pricetrend.common.StringFormatter
 import com.buzzdynegamingteam.pricetrend.common.models.Tracking
+import com.squareup.picasso.Picasso
 
 class TrackingListAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<TrackingListAdapter.TrackingViewHolder>() {
 
@@ -37,6 +38,11 @@ class TrackingListAdapter(private val listener: OnItemClickListener) : RecyclerV
         holder.price.text = StringFormatter.formatPriceToRupiah(currPrice)
         holder.priceDiff.text = StringFormatter.formatPriceToRupiah(priceDiff)
         holder.ts.text = StringFormatter.formatDateToString(latestTs)
+
+        Picasso.get()
+            .load(currItem.listing?.listingThumbUrl)
+            .placeholder(R.drawable.z650x500)
+            .into(holder.imageView)
 
         if(priceDiff!! <= 0) {
             holder.priceDiff.setTextColor(Color.GREEN)
