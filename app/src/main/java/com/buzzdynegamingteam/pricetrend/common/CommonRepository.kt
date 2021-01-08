@@ -58,8 +58,17 @@ object CommonRepository {
         }
     }
 
+    suspend fun getUserActiveTrackingIDs(): List<String>? {
+        return try {
+            Log.i(TAG, "_userValue: before, db.getUsr: ${db.getUserDoc(auth.getCurrUserUID()!!)!!}")
+            db.getUserDoc(auth.getCurrUserUID()!!)!!.activeTrackingMetadata
+        } catch (e: Exception) {
+            Log.e(TAG, "getUserData: Error in getting data", e)
+            null
+        }
+    }
+
     suspend fun getListOfUserTrackings(): MutableList<Tracking> {
-        // TODO Handle if a tracking item inside list is null
         val listOfTracking = db.getUserTrackings(auth.getCurrUserUID()!!)
         for (x in listOfTracking) {
             x.listingDocID?.let {
@@ -70,14 +79,19 @@ object CommonRepository {
     }
 
     suspend fun getTracking(trackingDocID: String): Tracking {
-        // TODO Handle if a tracking item inside list is null
-        // TODO Receive selected Tracking item to pass its DocID
-
         val tracking = db.getTracking(auth.getCurrUserUID()!!, trackingDocID)
         tracking.listingDocID?.let {
             tracking.listing = db.getListingDoc(tracking.listingDocID)
         }
 
         return tracking
+    }
+
+    suspend fun createTracking(tracking: Tracking) {
+        db.createTracking(auth.getCurrUserUID()!!, tracking)
+    }
+
+    suspend fun deleteTracking(trackingDocID: String) {
+        db.deleteTracking(auth.getCurrUserUID()!!, trackingDocID)
     }
 }

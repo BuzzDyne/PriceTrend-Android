@@ -1,6 +1,5 @@
 package com.buzzdynegamingteam.pricetrend.tracking.detail
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,9 +23,13 @@ class TrackingDetailViewModel(private val trackingDocID: String) : ViewModel() {
     val getListingDataRows : LiveData<List<Data>>
         get() = _listingDataRows
 
-    private val _updatingTracking = MutableLiveData<Boolean>()
-    val getUpdatingTracking : LiveData<Boolean>
-        get() = _updatingTracking
+    private val _isUpdatingTracking = MutableLiveData<Boolean>()
+    val getIsUpdatingTracking : LiveData<Boolean>
+        get() = _isUpdatingTracking
+
+    private val _isReadyToPop = MutableLiveData<Boolean>(false)
+    val getIsReadyToPop : LiveData<Boolean>
+        get() = _isReadyToPop
 
     private val _spinnerState = MutableLiveData<GraphSpinnerState>()
     val getSpinnerState : LiveData<GraphSpinnerState>
@@ -37,14 +40,23 @@ class TrackingDetailViewModel(private val trackingDocID: String) : ViewModel() {
     }
 
     fun loadNewTrackingData() {
-        _updatingTracking.value = true
+        _isUpdatingTracking.value = true
         viewModelScope.launch {
             _trackingData.value     = repo.getTracking(trackingDocID)
             _listingDataRows.value  = repo.getListingDataRows(_trackingData.value!!.listingDocID!!, 7)
             _spinnerState.value     = GraphSpinnerState.SOLD
-            _updatingTracking.value = false
+            _isUpdatingTracking.value = false
         }
     }
 
     fun setSpinnerState(state: GraphSpinnerState) { _spinnerState.value = state }
+
+    fun deleteTracking() {
+        _isUpdatingTracking.value = true
+        viewModelScope.launch {
+            repo.deleteTracking(trackingDocID)
+            _isUpdatingTracking.value = false
+            _isReadyToPop.value = true
+        }
+    }
 }

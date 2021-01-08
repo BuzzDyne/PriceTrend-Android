@@ -1,8 +1,9 @@
 package com.buzzdynegamingteam.pricetrend.tracking.detail
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -17,12 +18,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.buzzdynegamingteam.pricetrend.R
 import com.buzzdynegamingteam.pricetrend.common.StringFormatter.Companion.formatDateToString
 import com.buzzdynegamingteam.pricetrend.common.StringFormatter.Companion.formatPriceToRupiah
@@ -103,8 +100,18 @@ class TrackingDetailFragment : Fragment() {
             updateDataGraph(bind, viewModel.getListingDataRows.value!!, viewModel.getTrackingData.value!!, state)
         })
 
+        viewModel.getIsReadyToPop.observe(viewLifecycleOwner, Observer { isReadyToPop ->
+            if(isReadyToPop) {
+                navigateUp()
+            }
+        })
+
         bind.btnTokopedia.setOnClickListener{
             openLink(viewModel.getTrackingData.value?.listing?.listingURL)
+        }
+
+        bind.btnDeleteTracking.setOnClickListener {
+            showConfirmationDialog()
         }
 
         bind.spinnerLineChart2.adapter = ArrayAdapter<GraphSpinnerState>(requireContext(),
@@ -326,5 +333,24 @@ class TrackingDetailFragment : Fragment() {
         intent.putExtras(b)
 
         context?.startActivity(intent)
+    }
+
+    private fun showConfirmationDialog() {
+        val alert = AlertDialog.Builder(requireContext())
+        alert.setTitle("Delete Tracking?")
+        alert.setMessage("Are you sure you want to delete this tracking?\n(Tracking Data will be lost forever)")
+
+        alert.setPositiveButton("Delete", DialogInterface.OnClickListener { _, _ -> // User clicked OK button.
+            viewModel.deleteTracking()
+        })
+        alert.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which -> // User cancelled the dialog.
+
+        })
+
+        alert.show()
+    }
+
+    private fun navigateUp() {
+        findNavController().navigateUp()
     }
 }

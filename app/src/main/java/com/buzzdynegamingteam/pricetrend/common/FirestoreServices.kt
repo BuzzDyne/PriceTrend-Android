@@ -8,6 +8,7 @@ import com.buzzdynegamingteam.pricetrend.common.models.Tracking
 import com.buzzdynegamingteam.pricetrend.common.models.Tracking.Companion.toTracking
 import com.buzzdynegamingteam.pricetrend.common.models.User
 import com.buzzdynegamingteam.pricetrend.common.models.User.Companion.toUser
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.tasks.await
@@ -23,15 +24,15 @@ object FirestoreServices {
         return userDoc.exists()
     }
 
-    suspend fun getUserDoc(uid: String): User? {
-        val userDoc = db.collection("Users").document(uid).get().await()
-        return userDoc.toUser()
-    }
-
     suspend fun createUserDoc(uid: String, name: String) {
         val u = User(displayName = name)
         Log.e(TAG, "createUserDoc: creating user $u with uid ($uid)")
         db.collection("Users").document(uid).set(u).await()
+    }
+
+    suspend fun getUserDoc(uid: String): User? {
+        val userDoc = db.collection("Users").document(uid).get().await()
+        return userDoc.toUser()
     }
 
     suspend fun getUserTrackings(uid: String): MutableList<Tracking> {
@@ -49,6 +50,18 @@ object FirestoreServices {
         return  listOfTracking
     }
 
+    suspend fun createTracking(uid: String, tracking: Tracking) {
+        val userRef = db.collection("Users")
+                        .document(uid)
+
+        // Create TrackingDoc to 'activeTrackings' col
+        userRef.collection("activeTrackings")
+                .add(tracking).await()
+
+        // Add ListingID to 'activeTrackingMetadata' arr
+        userRef.update("activeTrackingMetadata", FieldValue.arrayUnion(tracking.listingID))
+    }
+
     suspend fun getTracking(uid: String, trackingDocID: String): Tracking {
         val trackingDoc = db.collection("Users")
             .document(uid)
@@ -57,6 +70,14 @@ object FirestoreServices {
             .get().await()
 
         return trackingDoc.toTracking() ?: Tracking()
+    }
+
+    suspend fun deleteTracking(uid: String, trackingDocID: String) {
+        db.collection("Users")
+            .document(uid)
+            .collection("activeTrackings")
+            .document(trackingDocID)
+            .delete().await()
     }
 
     suspend fun getListingDoc(listingDocID: String) : Listing? {

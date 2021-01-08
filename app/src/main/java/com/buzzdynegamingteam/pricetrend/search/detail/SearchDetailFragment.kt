@@ -14,8 +14,10 @@ import android.view.ViewParent
 import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.buzzdynegamingteam.pricetrend.R
 import com.buzzdynegamingteam.pricetrend.common.StringFormatter
@@ -79,6 +81,29 @@ class SearchDetailFragment : Fragment() {
             updateDataGraph(bind, viewModel.getListingDataRows.value!!, state)
         })
 
+        viewModel.getIsListingBeingTracked.observe(viewLifecycleOwner, Observer { isTracked ->
+//            Toast.makeText(requireContext(), "IsTracked = $isTracked", Toast.LENGTH_SHORT).show()
+            if (isTracked) {
+                bind.btnAdd.text = getString(R.string.go_to_tracking)
+                bind.btnAdd.setBackgroundColor(resources.getColor(R.color.teal_700))
+                bind.btnAdd.setOnClickListener {
+                    val action = SearchDetailFragmentDirections.actionSearchDetailFragmentToTrackingListFragment()
+                    findNavController().navigate(action)
+                }
+            } else {
+                bind.btnAdd.text = getString(R.string.add_to_my_tracking)
+                bind.btnAdd.setBackgroundColor(resources.getColor(R.color.purple_500))
+                bind.btnAdd.setOnClickListener {
+                    viewModel.createTracking()
+                    Toast.makeText(requireContext(), "Listing added to Tracking", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
+        bind.btnTokopedia.setOnClickListener{
+            openLink(viewModel.getListingData.value?.listingURL)
+        }
+
         bind.spinnerLineChart2.adapter = ArrayAdapter<GraphSpinnerState>(requireContext(),
             android.R.layout.simple_spinner_item, GraphSpinnerState.values() )
 
@@ -131,14 +156,7 @@ class SearchDetailFragment : Fragment() {
             axisLeft.enableGridDashedLine(10f, 10f, 0f)
         }
 
-
         return bind.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SearchDetailViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     private fun updatePriceGraph(bind: SearchDetailFragmentBinding, dataRows: List<Data>) {
@@ -269,5 +287,6 @@ class SearchDetailFragment : Fragment() {
 
         context?.startActivity(intent)
     }
+
 
 }

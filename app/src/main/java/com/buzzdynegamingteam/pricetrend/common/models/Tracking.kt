@@ -1,7 +1,9 @@
 package com.buzzdynegamingteam.pricetrend.common.models
 
 import android.util.Log
+import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.Exclude
 import java.lang.Exception
 import java.util.*
 
@@ -9,6 +11,7 @@ import java.util.*
  * Represents a single tracking of a User
  */
 data class Tracking (
+    @DocumentId
     val documentID: String? = null,
     val listingDocID: String? = null,
     val listingID: String? = null,
@@ -20,6 +23,7 @@ data class Tracking (
     val startReviewCount: Long? = null,
     val startReviewScore: Long? = null,
     val startDate: Date? = Date(),
+    @get:Exclude
     var listing: Listing? = null
 ) {
     companion object {

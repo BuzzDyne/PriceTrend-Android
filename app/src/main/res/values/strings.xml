@@ -35,5 +35,8 @@
     <string name="tracked_since_format">Tracked Since: %s</string>
     <string name="last_updated_format">Last Updated: %s</string>
     <string name="choose_data">Choose Data:</string>
+    <string name="add_to_my_tracking">Add to My Tracking</string>
+    <string name="tokped">tokped</string>
+    <string name="go_to_tracking">Go to Tracking</string>
 
 </resources>

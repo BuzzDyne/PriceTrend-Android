@@ -94,5 +94,8 @@
             android:name="listingDocID"
             app:argType="string"
             android:defaultValue="x"/>
+        <action
+            android:id="@+id/action_searchDetailFragment_to_trackingListFragment"
+            app:destination="@id/trackingListFragment" />
     </fragment>
 </navigation>

@@ -56,6 +56,11 @@ class TrackingListFragment : Fragment(), TrackingListAdapter.OnItemClickListener
         return bind.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadNewTrackingData()
+    }
+
     override fun onItemClick(pos: Int) {
         val trackingDocID = viewModel.getTrackingIDfromPos(pos) ?: ""
 
