@@ -78,6 +78,19 @@ object FirestoreServices {
         return listOfResults.toList()
     }
 
+    suspend fun getAllListings(): List<Listing> {
+        val resultDocs = db.collection("Listings")
+                .get().await()
+
+        val listOfResults = mutableListOf<Listing>()
+
+        for (doc in resultDocs.documents) {
+            listOfResults.add(doc.toListing() ?: Listing())
+        }
+
+        return listOfResults.toList()
+    }
+
     suspend fun getListingDataRows(listingDocID: String, rows: Long) : List<Data> {
         val listOfListingData = mutableListOf<Data>()
 

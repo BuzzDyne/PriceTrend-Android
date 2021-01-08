@@ -25,6 +25,14 @@ class SearchViewModel : ViewModel() {
         }
     }
 
+    fun getAllListings() {
+        _resultList.value = listOf()
+
+        viewModelScope.launch {
+            _resultList.value = repo.getAllListings()
+        }
+    }
+
     fun getListingDocIDfromPos(pos: Int): String? {
         return _resultList.value?.get(pos)?.documentId
     }

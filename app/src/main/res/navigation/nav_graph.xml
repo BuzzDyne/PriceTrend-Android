@@ -70,7 +70,11 @@
         android:id="@+id/searchFragment"
         android:name="com.buzzdynegamingteam.pricetrend.search.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/search_fragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_searchDetailFragment"
+            app:destination="@id/searchDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/trackingDetailFragment"
         android:name="com.buzzdynegamingteam.pricetrend.tracking.detail.TrackingDetailFragment"
@@ -78,6 +82,16 @@
         tools:layout="@layout/tracking_detail_fragment">
         <argument
             android:name="trackingDocID"
+            app:argType="string"
+            android:defaultValue="x"/>
+    </fragment>
+    <fragment
+        android:id="@+id/searchDetailFragment"
+        android:name="com.buzzdynegamingteam.pricetrend.search.detail.SearchDetailFragment"
+        android:label="Search Detail Fragment"
+        tools:layout="@layout/search_detail_fragment">
+        <argument
+            android:name="listingDocID"
             app:argType="string"
             android:defaultValue="x"/>
     </fragment>

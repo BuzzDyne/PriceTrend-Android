@@ -13,4 +13,8 @@ object SearchRepository {
     suspend fun getListingsByTag(tag: String): List<Listing> {
         return db.getListingDocByTag(tag)
     }
+
+    suspend fun getAllListings(): List<Listing> {
+        return db.getAllListings()
+    }
 }
