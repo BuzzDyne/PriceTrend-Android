@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.buzzdynegamingteam.pricetrend.common.CommonRepository
 import com.buzzdynegamingteam.pricetrend.common.graphing.GraphSpinnerState
 import com.buzzdynegamingteam.pricetrend.common.models.Data
 import com.buzzdynegamingteam.pricetrend.common.models.Tracking
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 class TrackingDetailViewModel(private val trackingDocID: String) : ViewModel() {
     private val TAG = "TrackingDetailViewModel"
 
-    private val repo = TrackingDetailRepository
+    private val repo = CommonRepository
 
     private val _trackingData = MutableLiveData<Tracking>()
     val getTrackingData : LiveData<Tracking>

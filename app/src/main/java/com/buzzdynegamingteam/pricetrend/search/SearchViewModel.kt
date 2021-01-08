@@ -4,12 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.buzzdynegamingteam.pricetrend.common.CommonRepository
 import com.buzzdynegamingteam.pricetrend.common.models.Listing
 import kotlinx.coroutines.launch
 
 class SearchViewModel : ViewModel() {
     private val TAG = "SearchViewModel"
-    private val repo = SearchRepository
+    private val repo = CommonRepository
 
 
     private val _resultList = MutableLiveData<List<Listing>>()

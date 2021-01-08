@@ -1,7 +1,5 @@
 package com.buzzdynegamingteam.pricetrend.common
 
-import android.util.Log
-import com.buzzdynegamingteam.pricetrend.home.HomeRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 

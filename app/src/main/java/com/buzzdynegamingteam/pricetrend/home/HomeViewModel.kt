@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.buzzdynegamingteam.pricetrend.common.CommonRepository
 import com.buzzdynegamingteam.pricetrend.common.models.Tracking
 import com.buzzdynegamingteam.pricetrend.common.models.User
 import com.google.firebase.auth.FirebaseUser
@@ -16,7 +17,7 @@ import java.util.*
 
 class HomeViewModel : ViewModel() {
     private val TAG = "HomeViewModel"
-    private val repo = HomeRepository
+    private val repo = CommonRepository
 
     private val _user = MutableLiveData<User>()
     val user : LiveData<User>

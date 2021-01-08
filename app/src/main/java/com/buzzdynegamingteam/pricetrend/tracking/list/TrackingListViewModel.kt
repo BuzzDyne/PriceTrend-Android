@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.buzzdynegamingteam.pricetrend.common.CommonRepository
 import com.buzzdynegamingteam.pricetrend.common.models.Tracking
 import kotlinx.coroutines.launch
 
 class TrackingListViewModel : ViewModel() {
-    private val repo = TrackingListRepository
+    private val repo = CommonRepository
 
     private val _trackingList = MutableLiveData<List<Tracking>>()
     val getTrackingList : LiveData<List<Tracking>>
