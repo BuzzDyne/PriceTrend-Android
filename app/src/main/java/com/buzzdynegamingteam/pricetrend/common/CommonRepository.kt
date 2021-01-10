@@ -91,7 +91,7 @@ object CommonRepository {
         db.createTracking(auth.getCurrUserUID()!!, tracking)
     }
 
-    suspend fun deleteTracking(trackingDocID: String) {
-        db.deleteTracking(auth.getCurrUserUID()!!, trackingDocID)
+    suspend fun deleteTracking(trackingDocID: String, listingID: String?) {
+        db.deleteTracking(auth.getCurrUserUID()!!, trackingDocID, listingID)
     }
 }

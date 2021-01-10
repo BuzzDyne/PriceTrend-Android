@@ -72,12 +72,15 @@ object FirestoreServices {
         return trackingDoc.toTracking() ?: Tracking()
     }
 
-    suspend fun deleteTracking(uid: String, trackingDocID: String) {
-        db.collection("Users")
-            .document(uid)
-            .collection("activeTrackings")
+    suspend fun deleteTracking(uid: String, trackingDocID: String, listingID: String?) {
+        val userDocRef = db.collection("Users")
+                            .document(uid)
+        userDocRef.collection("activeTrackings")
             .document(trackingDocID)
             .delete().await()
+
+        userDocRef.update("activeTrackingMetadata", FieldValue.arrayRemove(listingID))
+
     }
 
     suspend fun getListingDoc(listingDocID: String) : Listing? {

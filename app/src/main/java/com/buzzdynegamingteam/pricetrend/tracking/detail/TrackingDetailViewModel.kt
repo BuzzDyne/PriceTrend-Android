@@ -54,7 +54,7 @@ class TrackingDetailViewModel(private val trackingDocID: String) : ViewModel() {
     fun deleteTracking() {
         _isUpdatingTracking.value = true
         viewModelScope.launch {
-            repo.deleteTracking(trackingDocID)
+            repo.deleteTracking(trackingDocID, _trackingData.value?.listingID)
             _isUpdatingTracking.value = false
             _isReadyToPop.value = true
         }
