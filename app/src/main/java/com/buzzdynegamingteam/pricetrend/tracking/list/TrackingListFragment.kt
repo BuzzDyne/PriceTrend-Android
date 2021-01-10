@@ -3,15 +3,15 @@ package com.buzzdynegamingteam.pricetrend.tracking.list
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.buzzdynegamingteam.pricetrend.R
 import com.buzzdynegamingteam.pricetrend.databinding.TrackingListFragmentBinding
@@ -53,12 +53,30 @@ class TrackingListFragment : Fragment(), TrackingListAdapter.OnItemClickListener
             it.setBackgroundColor(Color.YELLOW)
         }
 
+        setHasOptionsMenu(true)
+
         return bind.root
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.loadNewTrackingData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        Log.e(TAG, "onCreateOptionsMenu: ")
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.tracking_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.goToSavingList) {
+            val action = TrackingListFragmentDirections.actionTrackingListFragmentToTrackingHistoryListFragment()
+            findNavController().navigate(action)
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onItemClick(pos: Int) {

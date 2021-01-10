@@ -1,10 +1,7 @@
 package com.buzzdynegamingteam.pricetrend.common
 
 import android.util.Log
-import com.buzzdynegamingteam.pricetrend.common.models.Data
-import com.buzzdynegamingteam.pricetrend.common.models.Listing
-import com.buzzdynegamingteam.pricetrend.common.models.Tracking
-import com.buzzdynegamingteam.pricetrend.common.models.User
+import com.buzzdynegamingteam.pricetrend.common.models.*
 
 object CommonRepository {
     private const val TAG = "CommonRepository"
@@ -93,5 +90,17 @@ object CommonRepository {
 
     suspend fun deleteTracking(trackingDocID: String, listingID: String?) {
         db.deleteTracking(auth.getCurrUserUID()!!, trackingDocID, listingID)
+    }
+
+    suspend fun getListOfUserSavingHistory(): MutableList<Saving> {
+        return db.getUserSavings(auth.getCurrUserUID()!!)
+    }
+
+    suspend fun getSavingHistory(savingDocID: String): Saving {
+        return db.getSaving(auth.getCurrUserUID()!!, savingDocID)
+    }
+
+    suspend fun createSavingHistory(tracking: Tracking) {
+        db.createSavingHistory(auth.getCurrUserUID()!!, tracking)
     }
 }

@@ -106,6 +106,10 @@ class TrackingDetailFragment : Fragment() {
             }
         })
 
+        bind.btnCompleteTracking.setOnClickListener{
+            viewModel.createSavingHistory()
+        }
+
         bind.btnTokopedia.setOnClickListener{
             openLink(viewModel.getTrackingData.value?.listing?.listingURL)
         }

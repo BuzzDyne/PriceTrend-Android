@@ -1,12 +1,10 @@
 package com.buzzdynegamingteam.pricetrend.common
 
 import android.util.Log
-import com.buzzdynegamingteam.pricetrend.common.models.Data
-import com.buzzdynegamingteam.pricetrend.common.models.Listing
+import com.buzzdynegamingteam.pricetrend.common.models.*
 import com.buzzdynegamingteam.pricetrend.common.models.Listing.Companion.toListing
-import com.buzzdynegamingteam.pricetrend.common.models.Tracking
+import com.buzzdynegamingteam.pricetrend.common.models.Saving.Companion.toSaving
 import com.buzzdynegamingteam.pricetrend.common.models.Tracking.Companion.toTracking
-import com.buzzdynegamingteam.pricetrend.common.models.User
 import com.buzzdynegamingteam.pricetrend.common.models.User.Companion.toUser
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -81,6 +79,63 @@ object FirestoreServices {
 
         userDocRef.update("activeTrackingMetadata", FieldValue.arrayRemove(listingID))
 
+    }
+
+    suspend fun getUserSavings(uid: String) : MutableList<Saving> {
+        val savingDocs = db.collection("Users")
+            .document(uid)
+            .collection("savingsHistory")
+            .get().await()
+
+        val listOfSaving = mutableListOf<Saving>()
+
+        for (doc in savingDocs.documents) {
+            listOfSaving.add( doc.toSaving() ?: Saving())
+        }
+
+        return listOfSaving
+    }
+
+    suspend fun getSaving(uid: String, savingDocID: String): Saving {
+        val savingDoc = db.collection("Users")
+            .document(uid)
+            .collection("savingsHistory")
+            .document(savingDocID)
+            .get().await()
+
+        return savingDoc.toSaving() ?: Saving()
+    }
+
+    suspend fun createSavingHistory(uid: String, tracking: Tracking) {
+        val listingName         = tracking.listing!!.listingName
+        val listingID           = tracking.listing!!.listingID
+        val listingURL          = tracking.listing!!.listingURL
+        val listingImgURL       = tracking.listing!!.listingImgURL
+        val listingThumbUrl     = tracking.listing!!.listingThumbUrl
+        val storeName           = tracking.listing!!.storeName
+        val storeArea           = tracking.listing!!.storeArea
+        val startData           = StartEndData(
+            tracking.startDate!!, tracking.startSoldCount, tracking.startStockCount,
+            tracking.startSeenCount, tracking.startReviewCount, tracking.startReviewScore,
+            tracking.startPrice
+        )
+        val latestData = tracking.listing!!.latestData!!
+        val endData             = StartEndData(
+            latestData.ts, latestData.sold, latestData.stock,
+            latestData.seen, latestData.reviewCount, latestData.reviewScore,
+            latestData.price
+        )
+
+        val data = Saving(
+            null, listingName, listingID, listingURL,
+            listingImgURL, listingThumbUrl, storeName,
+            storeArea, startData, endData
+        )
+
+        db.collection("Users")
+            .document(uid)
+            .collection("savingsHistory")
+            .add(data).await()
     }
 
     suspend fun getListingDoc(listingDocID: String) : Listing? {

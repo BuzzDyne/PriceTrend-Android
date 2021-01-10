@@ -38,5 +38,6 @@
     <string name="add_to_my_tracking">Add to My Tracking</string>
     <string name="tokped">tokped</string>
     <string name="go_to_tracking">Go to Tracking</string>
+    <string name="history">History</string>
 
 </resources>

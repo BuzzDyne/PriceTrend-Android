@@ -59,4 +59,14 @@ class TrackingDetailViewModel(private val trackingDocID: String) : ViewModel() {
             _isReadyToPop.value = true
         }
     }
+
+    fun createSavingHistory() {
+        _isUpdatingTracking.value = true
+        viewModelScope.launch {
+            repo.createSavingHistory(_trackingData.value!!)
+            repo.deleteTracking(trackingDocID, _trackingData.value!!.listingID)
+            _isUpdatingTracking.value = false
+            _isReadyToPop.value = true
+        }
+    }
 }
