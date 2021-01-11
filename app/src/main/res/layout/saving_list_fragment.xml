@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".tracking.history.list.TrackingHistoryListFragment"
+        tools:context=".tracking.history.list.SavingListFragment"
         >
 
         <LinearLayout
@@ -50,7 +50,7 @@
                     android:clipToPadding="false"
 
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/tracking_history_list_item" />
+                    tools:listitem="@layout/saving_list_item" />
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

@@ -103,7 +103,7 @@
     </fragment>
     <fragment
         android:id="@+id/trackingHistoryListFragment"
-        android:name="com.buzzdynegamingteam.pricetrend.tracking.history.list.TrackingHistoryListFragment"
+        android:name="com.buzzdynegamingteam.pricetrend.tracking.history.list.SavingListFragment"
         android:label="Saving History"
-        tools:layout="@layout/tracking_history_list_fragment"/>
+        tools:layout="@layout/saving_list_fragment"/>
 </navigation>

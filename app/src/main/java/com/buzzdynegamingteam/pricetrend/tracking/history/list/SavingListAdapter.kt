@@ -1,7 +1,6 @@
 package com.buzzdynegamingteam.pricetrend.tracking.history.list
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,17 +12,17 @@ import com.buzzdynegamingteam.pricetrend.common.StringFormatter
 import com.buzzdynegamingteam.pricetrend.common.models.Saving
 import com.squareup.picasso.Picasso
 
-class TrackingHistoryListAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<TrackingHistoryListAdapter.TrackingHistoryViewHolder>() {
+class SavingListAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<SavingListAdapter.SavingViewHolder>() {
 
     private var itemList : List<Saving> = listOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackingHistoryViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SavingViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.tracking_history_list_item, parent, false)
-        return TrackingHistoryViewHolder(itemView)
+            .inflate(R.layout.saving_list_item, parent, false)
+        return SavingViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: TrackingHistoryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SavingViewHolder, position: Int) {
         val currItem = itemList[position]
 
         val endPrice    = currItem.endData!!.price
@@ -58,7 +57,7 @@ class TrackingHistoryListAdapter(private val listener: OnItemClickListener) : Re
         notifyDataSetChanged()
     }
 
-    inner class TrackingHistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+    inner class SavingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
         val imageView: ImageView = itemView.findViewById(R.id.image_listing)

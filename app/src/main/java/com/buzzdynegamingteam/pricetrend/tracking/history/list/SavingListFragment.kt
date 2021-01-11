@@ -9,19 +9,19 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.buzzdynegamingteam.pricetrend.R
-import com.buzzdynegamingteam.pricetrend.databinding.TrackingHistoryListFragmentBinding
+import com.buzzdynegamingteam.pricetrend.databinding.SavingListFragmentBinding
 
-class TrackingHistoryListFragment : Fragment(), TrackingHistoryListAdapter.OnItemClickListener{
+class SavingListFragment : Fragment(), SavingListAdapter.OnItemClickListener{
 
-    private val TAG = "TrackingHistoryList"
-    private lateinit var viewModel: TrackingHistoryListViewModel
-    private lateinit var savingAdapter: TrackingHistoryListAdapter
+    private val TAG = "SavingListFragment"
+    private lateinit var viewModel: SavingListViewModel
+    private lateinit var savingAdapter: SavingListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val bind = DataBindingUtil.inflate<TrackingHistoryListFragmentBinding>(inflater, R.layout.tracking_history_list_fragment, container, false)
+        val bind = DataBindingUtil.inflate<SavingListFragmentBinding>(inflater, R.layout.saving_list_fragment, container, false)
 
-        viewModel = ViewModelProvider(this).get(TrackingHistoryListViewModel::class.java)
-        savingAdapter = TrackingHistoryListAdapter(this)
+        viewModel = ViewModelProvider(this).get(SavingListViewModel::class.java)
+        savingAdapter = SavingListAdapter(this)
 
         bind.recyclerTracking.adapter = savingAdapter
         bind.recyclerTracking.layoutManager = LinearLayoutManager(this.context)

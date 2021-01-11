@@ -8,7 +8,7 @@ import com.buzzdynegamingteam.pricetrend.common.CommonRepository
 import com.buzzdynegamingteam.pricetrend.common.models.Saving
 import kotlinx.coroutines.launch
 
-class TrackingHistoryListViewModel : ViewModel() {
+class SavingListViewModel : ViewModel() {
     private val repo = CommonRepository
 
     private val _trackingHistoryList = MutableLiveData<List<Saving>>()
