@@ -17,5 +17,9 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="SavingTableItem">
+        <item name="android:text">-</item>
+        <item name="android:gravity">center</item>
+    </style>
 
 </resources>

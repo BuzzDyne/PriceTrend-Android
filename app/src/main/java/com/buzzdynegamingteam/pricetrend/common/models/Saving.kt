@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.Exclude
 import java.lang.Exception
 import java.util.*
 
@@ -21,7 +22,10 @@ data class Saving(
     val storeArea           : String? = null,
 
     val startData           : StartEndData? = StartEndData(),
-    val endData             : StartEndData? = StartEndData()
+    val endData             : StartEndData? = StartEndData(),
+
+    @get:Exclude
+    var isExpanded          : Boolean = false
 ) {
     companion object {
         fun DocumentSnapshot.toSaving(): Saving? {

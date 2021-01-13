@@ -1,4 +1,4 @@
-package com.buzzdynegamingteam.pricetrend.tracking.history.list
+package com.buzzdynegamingteam.pricetrend.tracking.history
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.buzzdynegamingteam.pricetrend.R
 import com.buzzdynegamingteam.pricetrend.databinding.SavingListFragmentBinding
 
-class SavingListFragment : Fragment(), SavingListAdapter.OnItemClickListener{
+class SavingListFragment : Fragment(){
 
     private val TAG = "SavingListFragment"
     private lateinit var viewModel: SavingListViewModel
@@ -21,7 +21,7 @@ class SavingListFragment : Fragment(), SavingListAdapter.OnItemClickListener{
         val bind = DataBindingUtil.inflate<SavingListFragmentBinding>(inflater, R.layout.saving_list_fragment, container, false)
 
         viewModel = ViewModelProvider(this).get(SavingListViewModel::class.java)
-        savingAdapter = SavingListAdapter(this)
+        savingAdapter = SavingListAdapter()
 
         bind.recyclerTracking.adapter = savingAdapter
         bind.recyclerTracking.layoutManager = LinearLayoutManager(this.context)
@@ -47,11 +47,4 @@ class SavingListFragment : Fragment(), SavingListAdapter.OnItemClickListener{
         super.onResume()
         viewModel.loadNewTrackingHistory()
     }
-
-    override fun onItemClick(position: Int) {
-        val trackingHistoryDocID = viewModel.getTrackingHistoryDocIDfromPos(position)
-        Toast.makeText(requireContext(), "$trackingHistoryDocID clicked!", Toast.LENGTH_SHORT).show()
-    }
-
-
 }

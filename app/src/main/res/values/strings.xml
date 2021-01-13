@@ -39,5 +39,14 @@
     <string name="tokped">tokped</string>
     <string name="go_to_tracking">Go to Tracking</string>
     <string name="history">History</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="sold">Sold</string>
+    <string name="stock">Stock</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
+    <string name="price">Price</string>
+    <string name="seen">Seen</string>
+    <string name="review_count">Review Count</string>
+    <string name="review_score">Review Score</string>
 
 </resources>

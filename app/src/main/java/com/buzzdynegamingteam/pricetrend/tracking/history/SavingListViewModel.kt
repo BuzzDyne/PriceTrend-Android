@@ -1,4 +1,4 @@
-package com.buzzdynegamingteam.pricetrend.tracking.history.list
+package com.buzzdynegamingteam.pricetrend.tracking.history
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -28,7 +28,7 @@ class SavingListViewModel : ViewModel() {
         _trackingHistoryList.value = listOf()
 
         viewModelScope.launch {
-            _trackingHistoryList.value = repo.getListOfUserSavingHistory().toList()
+            _trackingHistoryList.value = repo.getListOfUserSavings().toList()
             _updatingData.value = false
         }
     }

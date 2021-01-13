@@ -61,7 +61,8 @@ class MainActivity : AppCompatActivity() {
         val noNavBarDestinations = listOf(
                 R.id.loginFragment,
                 R.id.trackingDetailFragment,
-                R.id.searchDetailFragment
+                R.id.searchDetailFragment,
+                R.id.savingListFragment
                 )
 
         navController.addOnDestinationChangedListener { _, destination, _ ->

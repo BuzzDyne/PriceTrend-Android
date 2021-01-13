@@ -92,11 +92,11 @@ object CommonRepository {
         db.deleteTracking(auth.getCurrUserUID()!!, trackingDocID, listingID)
     }
 
-    suspend fun getListOfUserSavingHistory(): MutableList<Saving> {
+    suspend fun getListOfUserSavings(): MutableList<Saving> {
         return db.getUserSavings(auth.getCurrUserUID()!!)
     }
 
-    suspend fun getSavingHistory(savingDocID: String): Saving {
+    suspend fun getSaving(savingDocID: String): Saving {
         return db.getSaving(auth.getCurrUserUID()!!, savingDocID)
     }
 
