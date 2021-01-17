@@ -32,7 +32,7 @@ data class Listing (
                 val statActiveTracking  = getLong("statActiveTracking")
                 val statBought          = getLong("statBought")
                 val listingName         = getString("listingName")
-                val listingID           = getLong("listingID").toString()
+                val listingID           = getString("listingID")
                 val listingURL          = getString("listingURL")
                 val listingImgURL       = getString("listingImgURL")
                 val listingThumbURL     = getString("listingThumbURL")
