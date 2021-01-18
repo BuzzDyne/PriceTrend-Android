@@ -70,13 +70,19 @@ class TrackingListFragment : Fragment(), TrackingListAdapter.OnItemClickListener
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.goToSavingList) {
-            val action = TrackingListFragmentDirections.actionTrackingListFragmentToTrackingHistoryListFragment()
-            findNavController().navigate(action)
-            return true
+        when(item.itemId) {
+            R.id.goToSavingList -> {
+                val action = TrackingListFragmentDirections.actionTrackingListFragmentToTrackingHistoryListFragment()
+                findNavController().navigate(action)
+                return true
+            }
+            R.id.goToRequestList -> {
+                val action = TrackingListFragmentDirections.actionTrackingListFragmentToRequestFragment()
+                findNavController().navigate(action)
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
         }
-
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onItemClick(pos: Int) {

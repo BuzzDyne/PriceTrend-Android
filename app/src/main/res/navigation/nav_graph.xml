@@ -68,6 +68,9 @@
         <action
             android:id="@+id/action_trackingListFragment_to_trackingHistoryListFragment"
             app:destination="@id/savingListFragment" />
+        <action
+            android:id="@+id/action_trackingListFragment_to_requestFragment"
+            app:destination="@id/requestFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -107,4 +110,9 @@
         android:label="Saving List"
         tools:layout="@layout/saving_list_fragment">
     </fragment>
+    <fragment
+        android:id="@+id/requestFragment"
+        android:name="com.buzzdynegamingteam.pricetrend.tracking.request.RequestFragment"
+        android:label="Request List"
+        tools:layout="@layout/request_fragment"/>
 </navigation>

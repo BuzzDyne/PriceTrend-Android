@@ -103,4 +103,9 @@ object CommonRepository {
     suspend fun createSavingHistory(tracking: Tracking) {
         db.createSavingHistory(auth.getCurrUserUID()!!, tracking)
     }
+
+    /** Scraper **/
+    suspend fun getUserRequests(): List<Request> {
+        return db.getRequests(auth.getCurrUserUID()!!).sortedWith(compareBy {it.statusCode})
+    }
 }

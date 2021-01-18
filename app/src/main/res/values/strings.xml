@@ -48,5 +48,18 @@
     <string name="seen">Seen</string>
     <string name="review_count">Review Count</string>
     <string name="review_score">Review Score</string>
+    <string name="long_text">A very long URL will be displayed right here on this very screen right here on this very screen right here on this very screen</string>
+    <string name="status">Status</string>
+    <string name="request_stat_0">Processing</string>
+    <string name="request_stat_200">Created</string>
+    <string name="request_stat_302">Existed</string>
+    <string name="request_stat_404">Not Found</string>
+    <string name="request_desc_0">Your request is still in queue. Please wait a few more minutes.</string>
+    <string name="request_desc_200">Your requested listing has not been tracked in our system before. We will start tracking it from now. Thank you for your submission</string>
+    <string name="request_desc_302">We found your requested listing in our system. Your tracking has been made!</string>
+    <string name="request_desc_404">Your requested listing cannot be found. Please try again in a few moment. If problem persist, please contact us.</string>
+    <string name="request_stat_error">-</string>
+    <string name="request_desc_error">Unknown Request StatusCode found!!!</string>
+    <string name="request">Request</string>
 
 </resources>

@@ -3,6 +3,7 @@ package com.buzzdynegamingteam.pricetrend.common
 import android.util.Log
 import com.buzzdynegamingteam.pricetrend.common.models.*
 import com.buzzdynegamingteam.pricetrend.common.models.Listing.Companion.toListing
+import com.buzzdynegamingteam.pricetrend.common.models.Request.Companion.toRequest
 import com.buzzdynegamingteam.pricetrend.common.models.Saving.Companion.toSaving
 import com.buzzdynegamingteam.pricetrend.common.models.Tracking.Companion.toTracking
 import com.buzzdynegamingteam.pricetrend.common.models.User.Companion.toUser
@@ -183,5 +184,19 @@ object FirestoreServices {
         }
 
         return listOfListingData
+    }
+
+    suspend fun getRequests(uid: String): List<Request> {
+        val reqDocs = db.collection("Scraper/newListing/UrlList")
+            .whereArrayContains("users", uid)
+            .get().await()
+
+        val listOfReq = mutableListOf<Request>()
+
+        for (doc in reqDocs.documents) {
+            listOfReq.add( doc.toRequest() ?: Request())
+        }
+
+        return listOfReq
     }
 }

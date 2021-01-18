@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView android:id="@+id/root_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    app:cardCornerRadius="6dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_part"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:padding="10dp"
+
+            android:background="@color/purple_200"
+            >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Request URL:"
+                android:textStyle="bold"
+                android:textSize="12sp"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/text_request_title"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+
+                android:layout_marginEnd="10dp"
+
+                android:text="@string/long_text"
+                android:ellipsize="end"
+                android:maxLines="1"
+
+                app:layout_constraintEnd_toStartOf="@id/layout_status"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView2" />
+
+            <LinearLayout
+                android:id="@+id/layout_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:gravity="right"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/status"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/text_request_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/request_stat_0"
+                    />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/expandable_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            >
+
+            <TextView
+                android:id="@+id/text_status_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+
+                android:text="@string/request_desc_0"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <Button
+                android:id="@+id/btn_req"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+
+                android:text="@string/see_all"
+
+                android:visibility="gone"
+
+                app:layout_constraintTop_toBottomOf="@id/text_status_desc"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
