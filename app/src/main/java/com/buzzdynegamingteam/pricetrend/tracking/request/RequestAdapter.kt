@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.buzzdynegamingteam.pricetrend.R
+import com.buzzdynegamingteam.pricetrend.common.StringFormatter
 import com.buzzdynegamingteam.pricetrend.common.models.Request
 
 class RequestAdapter : RecyclerView.Adapter<RequestAdapter.RequestViewHolder>() {
@@ -23,11 +24,19 @@ class RequestAdapter : RecyclerView.Adapter<RequestAdapter.RequestViewHolder>() 
     override fun onBindViewHolder(holder: RequestViewHolder, position: Int) {
         val currItem = itemList[position]
 
-        val title = currItem.url
-        val status = currItem.statusCode!!.toInt()
+        val title       = currItem.url
+        val status      = currItem.statusCode!!.toInt()
+        val requestTs   = StringFormatter.formatDateToString(currItem.reqTs)
+        var responseTs  = "-"
+
+        if(currItem.resTs != null) {
+            responseTs = StringFormatter.formatDateToString(currItem.resTs)
+        }
 
         with(holder) {
             reqTitle.text = title
+            reqTs.text = requestTs
+            resTs.text = responseTs
 
             when(status) {
                 0 -> {
@@ -91,6 +100,8 @@ class RequestAdapter : RecyclerView.Adapter<RequestAdapter.RequestViewHolder>() 
         val reqTitle: TextView = itemView.findViewById(R.id.text_request_title)
         val reqStatus: TextView = itemView.findViewById(R.id.text_request_status)
         val statusDesc: TextView = itemView.findViewById(R.id.text_status_desc)
+        val reqTs: TextView = itemView.findViewById(R.id.text_req_ts)
+        val resTs: TextView = itemView.findViewById(R.id.text_res_ts)
         val btn: Button = itemView.findViewById(R.id.btn_req)
 
         val mainPart: ConstraintLayout = itemView.findViewById(R.id.main_part)
