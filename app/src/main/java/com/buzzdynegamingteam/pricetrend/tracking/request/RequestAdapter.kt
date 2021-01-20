@@ -26,8 +26,12 @@ class RequestAdapter : RecyclerView.Adapter<RequestAdapter.RequestViewHolder>() 
 
         val title       = currItem.url
         val status      = currItem.statusCode!!.toInt()
-        val requestTs   = StringFormatter.formatDateToString(currItem.reqTs)
+        var requestTs   = "-"
         var responseTs  = "-"
+
+        if(currItem.reqTs != null) {
+            requestTs = StringFormatter.formatDateToString(currItem.reqTs)
+        }
 
         if(currItem.resTs != null) {
             responseTs = StringFormatter.formatDateToString(currItem.resTs)

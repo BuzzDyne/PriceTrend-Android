@@ -108,4 +108,9 @@ object CommonRepository {
     suspend fun getUserRequests(): List<Request> {
         return db.getRequests(auth.getCurrUserUID()!!).sortedWith(compareBy {it.statusCode})
     }
+
+    suspend fun createRequest(url: String) {
+        val req = Request(url, 0, arrayListOf(auth.getCurrUserUID()!!))
+        db.createRequest(req)
+    }
 }

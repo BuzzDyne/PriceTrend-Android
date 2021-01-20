@@ -36,6 +36,9 @@
             app:argType="string"
             android:defaultValue="null"
             app:nullable="true"/>
+        <action
+            android:id="@+id/action_homeFragment_to_trackingListFragment"
+            app:destination="@id/trackingListFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -62,6 +65,12 @@
         android:name="com.buzzdynegamingteam.pricetrend.tracking.list.TrackingListFragment"
         android:label="Tracking"
         tools:layout="@layout/tracking_list_fragment">
+        <argument
+            android:name="requestUrl"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true"
+            />
         <action
             android:id="@+id/action_trackingFragment_to_trackingDetailFragment"
             app:destination="@id/trackingDetailFragment" />

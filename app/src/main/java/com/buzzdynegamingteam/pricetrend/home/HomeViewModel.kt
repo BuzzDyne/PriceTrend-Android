@@ -40,6 +40,8 @@ class HomeViewModel : ViewModel() {
     val getCurrUser: LiveData<FirebaseUser?>
         get() = _currUser
 
+    var intentConsumed = false
+
     init {
         Log.e("HomeViewModel", "repo.getCurrUser: ${repo.getCurrUser()}")
         _currUser.value = repo.getCurrUser()

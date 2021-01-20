@@ -45,5 +45,13 @@ class StringFormatter {
                 "null!"
             }
         }
+
+        fun extractLinkFromString(input: String): String {
+            val pat = Regex("((https|http):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)")
+
+            val res = pat.find(input)
+
+            return res?.value ?: ""
+        }
     }
 }

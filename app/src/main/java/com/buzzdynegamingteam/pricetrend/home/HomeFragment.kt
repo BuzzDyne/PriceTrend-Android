@@ -47,6 +47,30 @@ class HomeFragment : Fragment() {
             }
         })
 
+        Log.e(TAG, "onCreateView: arg[urlText]= ${requireArguments().getString("urlText")}")
+
+        if(requireArguments().getString("urlText") != null && !viewModel.intentConsumed) {
+            viewModel.intentConsumed = true
+            Log.e(TAG, "onCreateView: argument = ${requireArguments()}")
+            val t = requireArguments().getString("urlText")?: ""
+
+            val action = HomeFragmentDirections.actionHomeFragmentToTrackingListFragment(t)
+            findNavController().navigate(action)
+        }
+//        when (intent?.action) {
+//            Intent.ACTION_SEND -> {
+//                when (intent.type) {
+//                    "text/plain" -> {
+//                        val t = intent.clipData?.getItemAt(0)?.text
+//                        val link = StringFormatter.extractLinkFromString(t.toString())
+//
+//                        val action = HomeFragmentDirections.actionHomeFragmentToTrackingListFragment(link)
+//                        findNavController().navigate(action)
+//                    }
+//                }
+//            }
+//        }
+
         return bind.root
     }
 

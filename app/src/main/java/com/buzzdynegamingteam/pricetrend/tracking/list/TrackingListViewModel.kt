@@ -19,6 +19,12 @@ class TrackingListViewModel : ViewModel() {
     val getUpdatingTrackingList : LiveData<Boolean>
         get() = _updatingTrackingList
 
+    private val _eventNavigateToRequest = MutableLiveData<Boolean>()
+    val getEventNavigateToRequest : LiveData<Boolean>
+        get() = _eventNavigateToRequest
+
+    var intentConsumed = false
+
     init {
         loadNewTrackingData()
     }
@@ -35,5 +41,26 @@ class TrackingListViewModel : ViewModel() {
 
     fun getTrackingIDfromPos(pos: Int): String? {
         return _trackingList.value?.get(pos)?.documentID
+    }
+
+    fun createRequest(url: String) {
+        _updatingTrackingList.value = true
+        viewModelScope.launch {
+            repo.createRequest(url)
+            _updatingTrackingList.value = false
+        }
+    }
+
+    fun createRequestFromIntent(url: String) {
+        _updatingTrackingList.value = true
+        viewModelScope.launch {
+            repo.createRequest(url)
+            _updatingTrackingList.value = false
+            _eventNavigateToRequest.value = true
+        }
+    }
+
+    fun onNavigateToRequestFinished() {
+        _eventNavigateToRequest.value = false
     }
 }

@@ -199,4 +199,18 @@ object FirestoreServices {
 
         return listOfReq
     }
+
+    suspend fun createRequest(request: Request) {
+        val colRef = db.collection("Scraper/newListing/UrlList")
+
+        val data = hashMapOf(
+            "url"            to request.url,
+            "statusCode"     to request.statusCode,
+            "requestTs"      to FieldValue.serverTimestamp(),
+            "responseTs"     to null,
+            "listingDocAddr" to null,
+            "users"          to request.users
+        )
+        colRef.add(data).await()
+    }
 }

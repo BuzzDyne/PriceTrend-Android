@@ -16,7 +16,7 @@ data class Request(
         var resTs           : Date? = null,
 
         @get:Exclude
-    var isExpanded          : Boolean = false
+        var isExpanded          : Boolean = false
 ) {
     companion object {
         fun DocumentSnapshot.toRequest(): Request? {
