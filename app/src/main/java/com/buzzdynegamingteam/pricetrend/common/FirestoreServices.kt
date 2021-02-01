@@ -158,6 +158,21 @@ object FirestoreServices {
         return listOfResults.toList()
     }
 
+    suspend fun getListingDocByQuery(query: List<String>) : List<Listing> {
+        Log.e(TAG, "getListingDocByQuery: query = $query")
+        val resultDocs = db.collection("Listings")
+                .whereArrayContainsAny("tags", query)
+                .get().await()
+
+        val listOfResults = mutableListOf<Listing>()
+
+        for (doc in resultDocs.documents) {
+            listOfResults.add(doc.toListing() ?: Listing())
+        }
+
+        return listOfResults.toList()
+    }
+
     suspend fun getAllListings(): List<Listing> {
         val resultDocs = db.collection("Listings")
                 .get().await()

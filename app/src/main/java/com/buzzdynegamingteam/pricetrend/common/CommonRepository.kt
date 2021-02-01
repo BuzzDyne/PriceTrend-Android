@@ -25,6 +25,10 @@ object CommonRepository {
         return db.getListingDocByTag(tag)
     }
 
+    suspend fun getListingsByQuery(query: List<String>): List<Listing> {
+        return db.getListingDocByQuery(query)
+    }
+
     suspend fun getAllListings(): List<Listing> {
         return db.getAllListings()
     }

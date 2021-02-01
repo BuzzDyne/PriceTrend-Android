@@ -53,5 +53,40 @@ class StringFormatter {
 
             return res?.value ?: ""
         }
+
+        fun queryToTags(input: String): List<String> {
+            /**
+             * Will returns List of tags from given input
+             * - Max Output Tags is 10 elements
+             */
+
+            val cleansedInput = filterNonAlphanumeric(input)
+
+            val tokenizedQuery = cleansedInput.split(" ")
+            val tokenLength = tokenizedQuery.size - 1
+
+
+            val res = mutableListOf<String>()
+
+            for (i in 0..tokenLength) {
+                val kywd = tokenizedQuery.slice(0..tokenLength-i)
+
+                val single = kywd.joinToString(" ")
+
+                res.add(single)
+            }
+
+
+            for (x in 1..tokenLength) {
+                res.add(tokenizedQuery.get(x))
+            }
+
+            return res.take(10)
+        }
+
+        private fun filterNonAlphanumeric(input: String): String {
+            val pat = Regex("[^0-9a-zA-Z]+")
+            return pat.replace(input," ").toLowerCase(Locale.getDefault())
+        }
     }
 }
