@@ -42,10 +42,12 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginTop="20dp"
-                android:text="@string/user001"
+                android:text=""
 
                 android:textColor="@android:color/primary_text_light"
                 android:textSize="24sp"
+
+                tools:text="User 1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_profile_picture" />

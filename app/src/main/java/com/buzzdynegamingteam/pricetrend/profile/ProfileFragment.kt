@@ -31,7 +31,11 @@ class ProfileFragment : Fragment() {
             }
         })
 
-        bind.textUsername.text = FirebaseAuth.getInstance().currentUser!!.displayName
+        viewModel.getUser.observe(viewLifecycleOwner, Observer { user ->
+            bind.textUsername.text = user.displayName
+            bind.textSavingSum.text = viewModel.getUserTotalSaving()
+            bind.textTrxCount.text = user.trxCount.toString()
+        })
 
         bind.btnLogout.setOnClickListener {
             viewModel.signOut()
