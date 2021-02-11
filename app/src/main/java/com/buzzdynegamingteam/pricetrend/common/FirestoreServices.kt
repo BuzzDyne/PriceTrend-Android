@@ -23,9 +23,9 @@ object FirestoreServices {
         return userDoc.exists()
     }
 
-    suspend fun createUserDoc(uid: String, name: String) {
-        val u = User(displayName = name)
-        Log.e(TAG, "createUserDoc: creating user $u with uid ($uid)")
+    suspend fun createUserDoc(uid: String, name: String, fcmToken: String) {
+        val u = User(displayName = name, fcmToken = fcmToken)
+        Log.e(TAG, "createUserDoc: creating user $u with uid ($uid) and FCM token ($)")
         db.collection("Users").document(uid).set(u).await()
     }
 
@@ -47,6 +47,18 @@ object FirestoreServices {
             listOfTracking.add( doc.toTracking() ?: Tracking() )
         }
         return  listOfTracking
+    }
+
+    suspend fun updateUserFcmToken(uid: String, token: String) {
+        db.collection("Users").document(uid)
+                .update("fcmToken", token)
+                .await()
+    }
+
+    suspend fun deleteUserFcmToken(uid: String) {
+        db.collection("Users").document(uid)
+                .update("fcmToken", null)
+                .await()
     }
 
     suspend fun createTracking(uid: String, tracking: Tracking) {

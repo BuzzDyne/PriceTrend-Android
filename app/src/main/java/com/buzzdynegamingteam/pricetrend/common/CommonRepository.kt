@@ -8,12 +8,21 @@ object CommonRepository {
 
     private val auth = AuthServices
     private val db = FirestoreServices
+    private val fcm = FCMServices
+
+    /** FCM **/
+    suspend fun getFCMToken() = fcm.getFCMToken()
 
     /** Auth **/
     fun getCurrUser() = auth.getCurrUser()
 
     fun getCurrDisplayName(): String? {
         return auth.getCurrUserDisplayName()?: "Guest"
+    }
+
+    suspend fun signOut() {
+        deleteUserFCMToken()
+        auth.signOut()
     }
 
     /** Listing **/
@@ -38,14 +47,14 @@ object CommonRepository {
     }
 
     /** UserDoc **/
-    suspend fun initCurrUserData(uid: String, uName: String = "Guest") {
-        Log.e(TAG, "initCurrUserData: uid = $uid, displayName = $uName")
+    suspend fun initCurrUserData(uid: String, uName: String = "Guest", fcmToken: String) {
+        Log.e(TAG, "initCurrUserData: uid = $uid, displayName = $uName, fcmToken = $fcmToken")
         //TODO db.isUserDocExist still isnt being called
         val isUserDocExist = db.isUserDocExist(uid)
         Log.e(TAG, "initCurrUserData: isDocExist $isUserDocExist")
         if(!isUserDocExist) {
             Log.e(TAG, "initCurrUserData: UserDoc does NOT exist")
-            db.createUserDoc(uid, uName)
+            db.createUserDoc(uid, uName, fcmToken)
         }
     }
 
@@ -106,6 +115,14 @@ object CommonRepository {
 
     suspend fun createSavingHistory(tracking: Tracking) {
         db.createSavingHistory(auth.getCurrUserUID()!!, tracking)
+    }
+
+    suspend fun updateUserFCMToken(token: String) {
+        db.updateUserFcmToken(auth.getCurrUserUID()!!, token)
+    }
+
+    suspend fun deleteUserFCMToken() {
+        db.deleteUserFcmToken(auth.getCurrUserUID()!!)
     }
 
     /** Scraper **/

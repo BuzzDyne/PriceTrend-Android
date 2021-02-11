@@ -32,7 +32,7 @@ class LoginRegisterViewModel : ViewModel(){
         val uid = _currUser.value!!.uid
 
         viewModelScope.launch {
-            repo.initCurrUserData(uid, uname)
+            repo.initCurrUserData(uid, uname, repo.getFCMToken())
             _loginFinished.value = true
         }
     }

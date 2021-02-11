@@ -48,10 +48,20 @@ class HomeViewModel : ViewModel() {
 
         if(_currUser.value != null) {
             viewModelScope.launch {
-                    _user.value         = repo.getUserData()
-                    _totalSaving.value  = getUserTotalSaving()
-                    _trxCount.value     = getTrxCount()
-                    _trackingList.value = repo.getListOfUserTrackings().toList()
+                _user.value         = repo.getUserData()
+                _totalSaving.value  = getUserTotalSaving()
+                _trxCount.value     = getTrxCount()
+                _trackingList.value = repo.getListOfUserTrackings().toList()
+
+                val oldFcmToken     = _user.value?.fcmToken
+                val newFcmToken     = repo.getFCMToken()
+
+                Log.e(TAG, "Saved FCM Token: $oldFcmToken")
+
+                if(!(oldFcmToken.equals(newFcmToken))) {
+                    Log.e(TAG, "found new token ($newFcmToken)")
+                    repo.updateUserFCMToken(newFcmToken)
+                }
             }
         }
     }

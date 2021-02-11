@@ -11,7 +11,8 @@ data class User(
     var profilePicUrl: String? = null,
     var totalSaving: Long? = 0,
     var trxCount: Long? = 0,
-    var activeTrackingMetadata: List<String>? = listOf()
+    var activeTrackingMetadata: List<String>? = listOf(),
+    var fcmToken: String? = null
 //    val documentId: String? = null
 ) {
     companion object {
@@ -25,9 +26,10 @@ data class User(
                 val tC      = getLong("trxCount")
                 @Suppress("UNCHECKED_CAST")
                 val aTM     = get("activeTrackingMetadata") as List<String>?
+                val fT      = getString("fcmToken")
 
 //                Log.i(TAG, "_userValue: User.toString: ${User(name,picUrl,tS,tC,aTM,docID).toString()}")
-                User(name,picUrl,tS,tC,aTM)
+                User(name,picUrl,tS,tC,aTM,fT)
 //                User(docID, name, picUrl, tS, tC, aTM)
             } catch (e: Exception) {
                 Log.e("User", "Error converting user profile", e)

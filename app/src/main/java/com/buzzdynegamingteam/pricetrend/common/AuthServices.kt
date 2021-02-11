@@ -17,4 +17,8 @@ object AuthServices {
     fun getCurrUser(): FirebaseUser? {
         return auth.currentUser
     }
+
+    fun signOut() {
+        auth.signOut()
+    }
 }
